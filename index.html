@@ -150,6 +150,130 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-将本地项目上传到Github仓库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/01/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E5%88%B0Github%E4%BB%93%E5%BA%93/">将本地项目上传到Github仓库</a>
+    </h1>
+  
+
+        
+        <a href="/2021/02/01/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E5%88%B0Github%E4%BB%93%E5%BA%93/" class="archive-article-date">
+  	<time datetime="2021-02-01T03:54:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>登录自己的github账号，新建一个仓库用来存放项目</p>
+<p>在本地找到要上传的本地项目文件，在项目根目录上右击，选择Git Bash Here打开git命令窗口</p>
+<p>输入以下命令：</p>
+<ol>
+<li><p>初始化仓库，将这个目录变成git可以管理的仓库</p>
+<blockquote>
+<p>git init</p>
+</blockquote>
+</li>
+<li><p>关联到github仓库</p>
+<blockquote>
+<p>git remote add origin 仓库链接</p>
+</blockquote>
+<p> 这里关联的我自己的一个仓库</p>
+<blockquote>
+<p>git remote add origin <a target="_blank" rel="noopener" href="https://github.com/allybuli/alien_invasion.git">https://github.com/allybuli/alien_invasion.git</a></p>
+</blockquote>
+</li>
+<li><p>将文件添加到暂存区，这里文件还没有上传到仓库</p>
+<blockquote>
+<p>git add .</p>
+</blockquote>
+</li>
+<li><p>将文件上传到仓库</p>
+<p> <font color=yellow>注意：需要将项目文件上传到指定的分支，一般先在git命令窗口切换到该分支下。</font></p>
+<p> 切换分支：</p>
+<blockquote>
+<p>git checkout 分支名字</p>
+</blockquote>
+<p> 将文件与远程仓库进行合并。</p>
+<blockquote>
+<p>git pull –rebase origin 分支名字</p>
+</blockquote>
+<p> 将文件推送到github仓库</p>
+<blockquote>
+<p>git push -u origin 分支名字</p>
+</blockquote>
+<p> 例：上传到main分支</p>
+<blockquote>
+<p>git push -u origin main</p>
+</blockquote>
+</li>
+<li><p>已上传成功。</p>
+</li>
+</ol>
+<p>附：</p>
+<p>切换分支指令：(切换到main分支)</p>
+<blockquote>
+<p>git checkout main</p>
+</blockquote>
+<p>创建分支指令：(创建test分支)</p>
+<blockquote>
+<p>git branch test</p>
+</blockquote>
+<p>删除与仓库关联指令：</p>
+<blockquote>
+<p>git remote rm origin</p>
+</blockquote>
+<p>更换仓库指令：</p>
+<blockquote>
+<p>git remote set-url origin 仓库地址</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/02/01/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E5%88%B0Github%E4%BB%93%E5%BA%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-WEB前端开发——HTML基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
