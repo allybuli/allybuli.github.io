@@ -16,7 +16,7 @@
 <meta property="og:description" content="Django官方中文文档">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-03-09T03:34:05.000Z">
-<meta property="article:modified_time" content="2021-03-09T03:42:15.878Z">
+<meta property="article:modified_time" content="2021-03-09T06:20:59.782Z">
 <meta property="article:author" content="ally">
 <meta name="twitter:card" content="summary">
   
@@ -199,8 +199,9 @@
 <p>打开polls/admin.py</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># polls/admin.py</span></span><br><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Question</span><br><span class="line"></span><br><span class="line">admin.site.register(Question)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Question</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span>(<span class="params">request</span>):</span></span><br><span class="line">    q = Question.objects.get(<span class="built_in">id</span>=<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(q.question_text)</span><br></pre></td></tr></table></figure>
-<p>开源数据库软件：</p>
-<h1 id="企业微信api"><a href="#企业微信api" class="headerlink" title="企业微信api"></a>企业微信api</h1><p>企业微信提供了各种接口，需要注意的是，在调用接口前，需要先获取access_token。access_token相当于一个身份证，你只有拿这个身份证是调用api，api的服务器才知道是你在调用，才会给你需要的信息。例如：<a target="_blank" rel="noopener" href="https://work.weixin.qq.com/api/doc/90000/90135/90200">https://work.weixin.qq.com/api/doc/90000/90135/90200</a></p>
+<p>开源数据库软件DBeaver: <a target="_blank" rel="noopener" href="https://github.com/dbeaver/dbeaver">https://github.com/dbeaver/dbeaver</a></p>
+<h1 id="企业微信api"><a href="#企业微信api" class="headerlink" title="企业微信api"></a>企业微信api</h1><p>企业微信api文档: <a target="_blank" rel="noopener" href="https://work.weixin.qq.com/api/doc/90000/90003/90556">https://work.weixin.qq.com/api/doc/90000/90003/90556</a></p>
+<p>企业微信提供了各种接口，需要注意的是，在调用接口前，需要先获取access_token。access_token相当于一个身份证，你只有拿这个身份证是调用api，api的服务器才知道是你在调用，才会给你需要的信息。例如：<a target="_blank" rel="noopener" href="https://work.weixin.qq.com/api/doc/90000/90135/90200">https://work.weixin.qq.com/api/doc/90000/90135/90200</a></p>
 <p>获取token地址：<a target="_blank" rel="noopener" href="https://work.weixin.qq.com/api/doc/90000/90135/91039">https://work.weixin.qq.com/api/doc/90000/90135/91039</a></p>
 <p>使用企业微信封装好的python库: <a target="_blank" rel="noopener" href="https://github.com/sbzhu/weworkapi_python">https://github.com/sbzhu/weworkapi_python</a></p>
 <p>这个python库是使用python2编写的，需要找到第三方python3版本或者自己修改成python3版本。</p>
