@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://allybuli.github.io">
-  <title>叶子的小本本</title>
+  <title>Django——笔记 | 叶子的小本本</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Django开始文档里面有详细的入门教程，包括安装教程，学习的时候可以按照文档的顺序进行学习。如果觉得文档读得有点吃力，可以先在B站找一些入门视频。 123456789# 安装. # 项目需要Python3，如果系统内同时有Python2和Python3，包工具可能需要使用pip3pip install django# 查看版本python -m django --version# 项目尽量使用新">
+  <meta name="description" content="Django官方中文文档">
 <meta property="og:type" content="article">
-<meta property="og:title" content="叶子的小本本">
+<meta property="og:title" content="Django——笔记">
 <meta property="og:url" content="https://allybuli.github.io/2021/03/09/Django%E2%80%94%E2%80%94%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="叶子的小本本">
-<meta property="og:description" content="Django开始文档里面有详细的入门教程，包括安装教程，学习的时候可以按照文档的顺序进行学习。如果觉得文档读得有点吃力，可以先在B站找一些入门视频。 123456789# 安装. # 项目需要Python3，如果系统内同时有Python2和Python3，包工具可能需要使用pip3pip install django# 查看版本python -m django --version# 项目尽量使用新">
+<meta property="og:description" content="Django官方中文文档">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-03-09T03:28:22.832Z">
-<meta property="article:modified_time" content="2021-03-09T03:29:44.585Z">
+<meta property="article:published_time" content="2021-03-09T03:34:05.000Z">
+<meta property="article:modified_time" content="2021-03-09T03:42:15.878Z">
 <meta property="article:author" content="ally">
 <meta name="twitter:card" content="summary">
   
@@ -149,9 +149,26 @@
             <article id="post-Django——笔记" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Django——笔记
+    </h1>
+  
+
+        
+        <a href="/2021/03/09/Django%E2%80%94%E2%80%94%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2021-03-09T03:34:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-09</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h2><h5 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h5><p>文档里面有详细的入门教程，包括安装教程，学习的时候可以按照文档的顺序进行学习。如果觉得文档读得有点吃力，可以先在B站找一些入门视频。</p>
+        <p><a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/3.1/">Django官方中文文档</a></p>
+<a id="more"></a>
+<p>文档里面有详细的入门教程，包括安装教程，学习的时候可以按照文档的顺序进行学习。如果觉得文档读得有点吃力，可以先在B站找一些入门视频吧。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装.</span> </span><br><span class="line"><span class="meta">#</span><span class="bash"> 项目需要Python3，如果系统内同时有Python2和Python3，包工具可能需要使用pip3</span></span><br><span class="line">pip install django</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看版本</span></span><br><span class="line">python -m django --version</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 项目尽量使用新的django 版本。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> django 3.1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> python &gt; 3.6</span></span><br></pre></td></tr></table></figure>
 <h5 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h5><p>Django和我们平时写的小程序不太一样，我们刚开始学的时候，一般都是单文件程序，遇到多文件都是import进去。而Django需要建立一个工程，一个工程包括包括数据库配置、Django 配置和应用程序配置。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> mysite: 项目名称</span></span><br><span class="line">django-admin startproject mysite</span><br></pre></td></tr></table></figure>
@@ -185,9 +202,10 @@
 <p>开源数据库软件：</p>
 <h1 id="企业微信api"><a href="#企业微信api" class="headerlink" title="企业微信api"></a>企业微信api</h1><p>企业微信提供了各种接口，需要注意的是，在调用接口前，需要先获取access_token。access_token相当于一个身份证，你只有拿这个身份证是调用api，api的服务器才知道是你在调用，才会给你需要的信息。例如：<a target="_blank" rel="noopener" href="https://work.weixin.qq.com/api/doc/90000/90135/90200">https://work.weixin.qq.com/api/doc/90000/90135/90200</a></p>
 <p>获取token地址：<a target="_blank" rel="noopener" href="https://work.weixin.qq.com/api/doc/90000/90135/91039">https://work.weixin.qq.com/api/doc/90000/90135/91039</a></p>
-<p>使用企业微信封装好的python库：</p>
+<p>使用企业微信封装好的python库: <a target="_blank" rel="noopener" href="https://github.com/sbzhu/weworkapi_python">https://github.com/sbzhu/weworkapi_python</a></p>
 <p>这个python库是使用python2编写的，需要找到第三方python3版本或者自己修改成python3版本。</p>
-
+<hr/>
+参考文章：https://www.cnblogs.com/xiaoqingSister/p/13355832.html
       
 
       
@@ -314,7 +332,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Django"><span class="toc-number">1.</span> <span class="toc-text">Django</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">开始</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%A5%E9%97%A8"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">入门</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%EF%BC%88%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%89"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">模型（数据库）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#admin%EF%BC%88%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%EF%BC%89"><span class="toc-number">1.0.0.4.</span> <span class="toc-text">admin（后台管理）</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1api"><span class="toc-number"></span> <span class="toc-text">企业微信api</span></a>
+                    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%A5%E9%97%A8"><span class="toc-number">1.</span> <span class="toc-text">入门</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%EF%BC%88%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">模型（数据库）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#admin%EF%BC%88%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">admin（后台管理）</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1api"><span class="toc-number"></span> <span class="toc-text">企业微信api</span></a>
                     </div>
                 </span>
             </div>
