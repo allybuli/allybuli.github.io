@@ -17,7 +17,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://allybuli.github.io/images/float-point_encoding.jpg">
 <meta property="article:published_time" content="2021-07-30T03:26:53.000Z">
-<meta property="article:modified_time" content="2021-07-30T07:57:18.041Z">
+<meta property="article:modified_time" content="2021-07-31T06:15:32.307Z">
 <meta property="article:author" content="ally">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://allybuli.github.io/images/float-point_encoding.jpg">
@@ -192,7 +192,7 @@
 <p>0 10001100 1101101101101<br>s &emsp;exp &emsp;&emsp;&emsp;frac</p>
 </blockquote>
 <ul>
-<li><p><font color = blue>非规范化的值</font><br>此时exp = 00…00。阶码值E = 1 - Bias，尾数值M = f，不包含隐含的开头的1。<br>当exp = 00…00 且 frac = 00…00时，表示0。符号位s = 0时，表示+1；s = 1时，表示-1。<br>非规格化数的另一个功能是表示那些非常接近于0.0的数。它们提供了一种属性，称为<font color = yellow>逐渐下溢</font>，其中，可能的数值分部均匀地接近于0.0。</p>
+<li><p><font color = blue>非规范化的值</font><br>此时exp = 00…00。阶码值E = 1 - Bias，尾数值M = f，不包含隐含的开头的1。<br>当exp = 00…00 且 frac = 00…00时，表示0。符号位s = 0时，表示+1；s = 1时，表示-1。<br>非规格化数的另一个功能是表示那些非常接近于0.0的数。它们提供了一种属性，称为<font color = red>逐渐下溢</font>，其中，可能的数值分部均匀地接近于0.0。</p>
 </li>
 <li><p><font color = blue>特殊值</font><br>此时exp = 11…11。<br>当exp = 11…11 且 frac = 00…00时，表示∞，同样由符号位来决定是+∞还是-∞。无穷用来表示溢出的结果，比如两个非常大的数相乘。<br>当exp = 11…11 且 frac ≠ 00…00时，结果值被称为”NaN”,即不是一个数(Not a Number)。比如sqrt(-1)。</p>
 </li>
