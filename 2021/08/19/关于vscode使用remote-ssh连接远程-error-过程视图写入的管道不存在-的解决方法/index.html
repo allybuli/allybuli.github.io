@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://allybuli.github.io">
-  <title>C++ Primer笔记--数组 | 叶子的小本本</title>
+  <title>关于vscode使用remote-ssh连接远程(error:过程视图写入的管道不存在)的解决方法 | 叶子的小本本</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="数组是一种类似于标准库类型vector的数据结构，但其大小是固定的。">
+  <meta name="description" content="戳了一下午，终于搞好了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++ Primer笔记--数组">
-<meta property="og:url" content="https://allybuli.github.io/2021/08/03/C++Primer%E7%AC%94%E8%AE%B0-%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:title" content="关于vscode使用remote-ssh连接远程(error:过程视图写入的管道不存在)的解决方法">
+<meta property="og:url" content="https://allybuli.github.io/2021/08/19/%E5%85%B3%E4%BA%8Evscode%E4%BD%BF%E7%94%A8remote-ssh%E8%BF%9E%E6%8E%A5%E8%BF%9C%E7%A8%8B-error-%E8%BF%87%E7%A8%8B%E8%A7%86%E5%9B%BE%E5%86%99%E5%85%A5%E7%9A%84%E7%AE%A1%E9%81%93%E4%B8%8D%E5%AD%98%E5%9C%A8-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="叶子的小本本">
-<meta property="og:description" content="数组是一种类似于标准库类型vector的数据结构，但其大小是固定的。">
+<meta property="og:description" content="戳了一下午，终于搞好了。">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-08-03T14:52:53.000Z">
-<meta property="article:modified_time" content="2021-08-03T15:40:57.700Z">
+<meta property="article:published_time" content="2021-08-19T07:05:37.000Z">
+<meta property="article:modified_time" content="2021-08-19T07:33:46.487Z">
 <meta property="article:author" content="ally">
 <meta name="twitter:card" content="summary">
   
@@ -146,47 +146,44 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-C++Primer笔记-数组" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-关于vscode使用remote-ssh连接远程-error-过程视图写入的管道不存在-的解决方法" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      C++ Primer笔记--数组
+      关于vscode使用remote-ssh连接远程(error:过程视图写入的管道不存在)的解决方法
     </h1>
   
 
         
-        <a href="/2021/08/03/C++Primer%E7%AC%94%E8%AE%B0-%E6%95%B0%E7%BB%84/" class="archive-article-date">
-  	<time datetime="2021-08-03T14:52:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-03</time>
+        <a href="/2021/08/19/%E5%85%B3%E4%BA%8Evscode%E4%BD%BF%E7%94%A8remote-ssh%E8%BF%9E%E6%8E%A5%E8%BF%9C%E7%A8%8B-error-%E8%BF%87%E7%A8%8B%E8%A7%86%E5%9B%BE%E5%86%99%E5%85%A5%E7%9A%84%E7%AE%A1%E9%81%93%E4%B8%8D%E5%AD%98%E5%9C%A8-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2021-08-19T07:05:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>数组是一种类似于标准库类型vector的数据结构，但其大小是固定的。<a id="more"></a></p>
-</blockquote>
-<p>数组是存放类型相同的对象的容器，数组的大小确定不变，不能随意向数组中添加元素。</p>
+        <p>戳了一下午，终于搞好了。<a id="more"></a><br>错误描述：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[20:50:57.334] &gt; CreateProcessW failed error:2  </span><br><span class="line">&gt;   </span><br><span class="line">[20:50:57.344] &gt; posix_spawn: No such file or directory</span><br><span class="line">&gt; 过程试图写入的管道不存在。</span><br><span class="line">&gt; </span><br></pre></td></tr></table></figure>
+<p><font color=red>我的错误原因：win10自带了ssh，同时安装了git，git带有ssh，远程连接时vscode会自动调用本地的ssh，这样会发生调用冲突。</font></p>
+<p><font color=green>解决方法：修改windows的ssh的默认环境变量，使用git的ssh。</font><br>修改前的环境变量：</p>
 <blockquote>
-<p>字符数组比较特殊，可以用字符串字面值进行初始化，字符串字面值的结尾处自动添加空字符表示结束。<br>例：char a[] = “C++”;</p>
+<p>%SYSTEMROOT%\System32\OpenSSH\</p>
 </blockquote>
-<h3 id="指针和数组"><a href="#指针和数组" class="headerlink" title="指针和数组"></a>指针和数组</h3><p>使用数组的时候编译器一般会把它转换成指针。</p>
+<p>因为此时git的路径也在环境变量中，git中带有ssh，因此会造成冲突。用git的ssh(git中包含ssh.exe的文件路径)覆盖默认的ssh，即可。<br>在我的机器上是：</p>
 <blockquote>
-<p>在大多数表达式中，使用数组类型的对象其实是使用一个指向该数组首元素的指针。</p>
+<p>D:\software\Git\usr\bin</p>
 </blockquote>
-<p>begin函数返回指向数组首元素的指针，end函数返回指向数组尾元素下一个位置的指针。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> *l = begin(a), *r = end(a);</span><br></pre></td></tr></table></figure>
-<h3 id="下标和指针"><a href="#下标和指针" class="headerlink" title="下标和指针"></a>下标和指针</h3><p>数组的名字是一个指向数组首元素的指针。</p>
-<blockquote>
-<p>内置的下标运算符所用的索引不是无符号类型，可以处理负值。</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>] = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;a[<span class="number">4</span>];</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;p[-1] = &quot;</span> &lt;&lt; p[<span class="number">-1</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;p[-2] = &quot;</span> &lt;&lt; p[<span class="number">-2</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
-<p>输出：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p[<span class="number">-1</span>] = <span class="number">3</span></span><br><span class="line">p[<span class="number">-2</span>] = <span class="number">2</span></span><br></pre></td></tr></table></figure>
-<p>多维数组：即数组的数组。</p>
+<p>重启之后，再次连接即可成功！</p>
+<p>参考链接：  </p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42096901/article/details/105193366">https://blog.csdn.net/weixin_42096901/article/details/105193366</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44363614/article/details/110558250">https://blog.csdn.net/weixin_44363614/article/details/110558250</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43569916/article/details/105168505">https://blog.csdn.net/weixin_43569916/article/details/105168505</a></li>
+</ul>
 
       
 
@@ -271,7 +268,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2021/08/03/C++Primer%E7%AC%94%E8%AE%B0-%E6%95%B0%E7%BB%84/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2021/08/19/%E5%85%B3%E4%BA%8Evscode%E4%BD%BF%E7%94%A8remote-ssh%E8%BF%9E%E6%8E%A5%E8%BF%9C%E7%A8%8B-error-%E8%BF%87%E7%A8%8B%E8%A7%86%E5%9B%BE%E5%86%99%E5%85%A5%E7%9A%84%E7%AE%A1%E9%81%93%E4%B8%8D%E5%AD%98%E5%9C%A8-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -285,18 +282,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/08/19/%E5%85%B3%E4%BA%8Evscode%E4%BD%BF%E7%94%A8remote-ssh%E8%BF%9E%E6%8E%A5%E8%BF%9C%E7%A8%8B-error-%E8%BF%87%E7%A8%8B%E8%A7%86%E5%9B%BE%E5%86%99%E5%85%A5%E7%9A%84%E7%AE%A1%E9%81%93%E4%B8%8D%E5%AD%98%E5%9C%A8-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          关于vscode使用remote-ssh连接远程(error:过程视图写入的管道不存在)的解决方法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/07/30/CSAPP%E7%AC%94%E8%AE%B0-%E6%B5%AE%E7%82%B9%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">CSAPP笔记--浮点数</div>
+    <a href="/2021/08/03/C++Primer%E7%AC%94%E8%AE%B0-%E6%95%B0%E7%BB%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C++ Primer笔记--数组</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -323,7 +311,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84"><span class="toc-number">1.</span> <span class="toc-text">指针和数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E6%A0%87%E5%92%8C%E6%8C%87%E9%92%88"><span class="toc-number">2.</span> <span class="toc-text">下标和指针</span></a></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
