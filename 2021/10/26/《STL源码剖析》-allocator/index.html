@@ -17,7 +17,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://allybuli.github.io/images/allocator2th.jpg">
 <meta property="article:published_time" content="2021-10-26T11:39:10.000Z">
-<meta property="article:modified_time" content="2021-10-26T14:48:57.847Z">
+<meta property="article:modified_time" content="2021-10-27T13:54:15.347Z">
 <meta property="article:author" content="ally">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://allybuli.github.io/images/allocator2th.jpg">
@@ -175,7 +175,7 @@
 <h1 id="主要接口"><a href="#主要接口" class="headerlink" title="主要接口"></a>主要接口</h1><ul>
 <li>allocate::allocate(…)<br>  <strong>配置空间，可以简单理解为 ::operator new()</strong></li>
 <li>allocator::deallocate(…)<br>  <strong>释放空间, 可以简单理解为 ::operator delete()</strong></li>
-<li>allocator::construct(…)<br>  <strong>对象构造, 可以简单理解为调用构造函数</strong></li>
+<li>allocator::construct(…)<br>  <strong>对象构造, 可以简单理解为调用构造函数</strong><br>  利用new运算子，在指定的内存位置创建一个对象并调用其构造函数，指定内存位置需先分配好。<br>  <font color = red>适合需要在同一个位置多次调用构造，重复使用内存的场景。</font><br>  即在容器存放多个对象时使用。</li>
 <li>allocator::destroy(…)<br>  <strong>对象析构，可以简单理解为调用析构函数</strong></li>
 </ul>
 <h1 id="SGI-STL的默认配置器-std-alloc"><a href="#SGI-STL的默认配置器-std-alloc" class="headerlink" title="SGI STL的默认配置器(std::alloc)"></a>SGI STL的默认配置器(std::alloc)</h1><h2 id="lt-stl-construct-h-gt"><a href="#lt-stl-construct-h-gt" class="headerlink" title="&lt;stl_construct.h&gt;"></a>&lt;stl_construct.h&gt;</h2><p>定义了全局函数construct()和destroy()，负责对象的构造和析构。</p>
@@ -292,6 +292,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/11/14/C++%E8%99%9A%E5%87%BD%E6%95%B0%E2%80%94%E2%80%94%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          C++虚函数——笔记
+        
+      </div>
+    </a>
   
   
     <a href="/2021/08/23/Makefile%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
