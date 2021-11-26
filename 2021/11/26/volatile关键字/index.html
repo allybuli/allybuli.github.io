@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://allybuli.github.io">
-  <title>Archives | 叶子的小本本</title>
+  <title>volatile关键字 | 叶子的小本本</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="叶子的小本本">
-<meta property="og:url" content="https://allybuli.github.io/archives/index.html">
+  <meta name="description" content="C&#x2F;C++ 中的 volatile 关键字和 const 对应，用来修饰变量，通常用于建立语言级别的 memory barrier。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="volatile关键字">
+<meta property="og:url" content="https://allybuli.github.io/2021/11/26/volatile%E5%85%B3%E9%94%AE%E5%AD%97/index.html">
 <meta property="og:site_name" content="叶子的小本本">
+<meta property="og:description" content="C&#x2F;C++ 中的 volatile 关键字和 const 对应，用来修饰变量，通常用于建立语言级别的 memory barrier。">
 <meta property="og:locale">
+<meta property="article:published_time" content="2021-11-26T01:16:07.000Z">
+<meta property="article:modified_time" content="2021-11-26T01:37:29.878Z">
 <meta property="article:author" content="ally">
 <meta name="twitter:card" content="summary">
   
@@ -142,295 +146,186 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-volatile关键字" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      volatile关键字
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/26/volatile%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
+
+        
+        <a href="/2021/11/26/volatile%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
   	<time datetime="2021-11-26T01:16:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-26</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/26/volatile%E5%85%B3%E9%94%AE%E5%AD%97/">volatile关键字</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>C/C++ 中的 volatile 关键字和 const 对应，用来修饰变量，通常用于建立语言级别的 memory barrier。<a id="more"></a></p>
+</blockquote>
+<p>volatile 关键字是一种类型修饰符，用它声明的类型变量表示可以被某些编译器未知的因素更改，比如：操作系统、硬件或者其它线程等。遇到这个关键字声明的变量，编译器对访问该变量的代码就不再进行优化，从而可以提供对特殊地址的稳定访问。</p>
+<p>当要求使用 volatile 声明的变量的值的时候，系统总是重新从它所在的内存读取数据，即使它前面的指令刚刚从该处读取过数据。而且读取的数据立刻被保存。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Compile code with optimization option */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> local = <span class="number">10</span>; </span><br><span class="line">    <span class="keyword">int</span> *ptr = (<span class="keyword">int</span>*) &amp;local; </span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Initial value of local : %d \n&quot;</span>, local); </span><br><span class="line"></span><br><span class="line">    *ptr = <span class="number">100</span>; </span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Modified value of local: %d \n&quot;</span>, local);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>控制台输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Initial value of local : 10 </span><br><span class="line">Modified value of local: 10</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Compile code without optimization option */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="keyword">int</span> local = <span class="number">10</span>; </span><br><span class="line">    <span class="keyword">int</span> *ptr = (<span class="keyword">int</span>*) &amp;local; </span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Initial value of local : %d \n&quot;</span>, local); </span><br><span class="line"></span><br><span class="line">    *ptr = <span class="number">100</span>; </span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Modified value of local: %d \n&quot;</span>, local); </span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>控制台输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Initial value of local : 10 </span><br><span class="line">Modified value of local: 100</span><br></pre></td></tr></table></figure>
+<p>原因：<strong>volatile 关键字声明的变量，每次访问时都必须从内存中取出值（没有被 volatile 修饰的变量，可能由于编译器的优化，从 CPU 寄存器中取值）</strong></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wx.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2021/11/26/volatile%E5%85%B3%E9%94%AE%E5%AD%97/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/16/C++%E5%A4%9A%E6%80%81%E2%80%94%E2%80%94%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2021-11-16T08:12:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-16</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/11/16/C++%E5%A4%9A%E6%80%81%E2%80%94%E2%80%94%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C++多态--笔记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/16/C++%E5%A4%9A%E6%80%81%E2%80%94%E2%80%94%E7%AC%94%E8%AE%B0/">C++多态--笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/14/C++%E8%99%9A%E5%87%BD%E6%95%B0%E2%80%94%E2%80%94%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2021-11-14T15:02:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/14/C++%E8%99%9A%E5%87%BD%E6%95%B0%E2%80%94%E2%80%94%E7%AC%94%E8%AE%B0/">C++虚函数——笔记</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/26/%E3%80%8ASTL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E3%80%8B-allocator/" class="archive-article-date">
-  	<time datetime="2021-10-26T11:39:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/26/%E3%80%8ASTL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E3%80%8B-allocator/">《STL源码剖析》 -- allocator</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/23/Makefile%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2021-08-23T13:12:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/23/Makefile%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">makefile学习笔记</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/22/GDB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2021-08-22T04:21:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/22/GDB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">GDB学习笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/19/%E5%85%B3%E4%BA%8Evscode%E4%BD%BF%E7%94%A8remote-ssh%E8%BF%9E%E6%8E%A5%E8%BF%9C%E7%A8%8B-error-%E8%BF%87%E7%A8%8B%E8%AF%95%E5%9B%BE%E5%86%99%E5%85%A5%E7%9A%84%E7%AE%A1%E9%81%93%E4%B8%8D%E5%AD%98%E5%9C%A8-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2021-08-19T07:05:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/19/%E5%85%B3%E4%BA%8Evscode%E4%BD%BF%E7%94%A8remote-ssh%E8%BF%9E%E6%8E%A5%E8%BF%9C%E7%A8%8B-error-%E8%BF%87%E7%A8%8B%E8%AF%95%E5%9B%BE%E5%86%99%E5%85%A5%E7%9A%84%E7%AE%A1%E9%81%93%E4%B8%8D%E5%AD%98%E5%9C%A8-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">关于vscode使用remote-ssh连接远程(error:过程试图写入的管道不存在)的解决方法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/03/C++Primer%E7%AC%94%E8%AE%B0-%E6%95%B0%E7%BB%84/" class="archive-article-date">
-  	<time datetime="2021-08-03T14:52:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/03/C++Primer%E7%AC%94%E8%AE%B0-%E6%95%B0%E7%BB%84/">C++ Primer笔记--数组</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/30/CSAPP%E7%AC%94%E8%AE%B0-%E6%B5%AE%E7%82%B9%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2021-07-30T03:26:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/30/CSAPP%E7%AC%94%E8%AE%B0-%E6%B5%AE%E7%82%B9%E6%95%B0/">CSAPP笔记--浮点数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/26/CSAPP-Unit2/" class="archive-article-date">
-  	<time datetime="2021-07-26T15:00:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/26/CSAPP-Unit2/">CSAPP Unit2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -454,8 +349,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
