@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://allybuli.github.io/images/cpp_virtual_function_notes/Derive01.jpg">
 <meta property="og:image" content="https://allybuli.github.io/images/cpp_virtual_function_notes/Derive02.jpg">
 <meta property="article:published_time" content="2021-11-14T15:02:29.000Z">
-<meta property="article:modified_time" content="2021-11-26T06:20:45.288Z">
+<meta property="article:modified_time" content="2021-11-26T06:23:34.971Z">
 <meta property="article:author" content="ally">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://allybuli.github.io/images/cpp_virtual_function_notes/Base.jpg">
@@ -204,6 +204,7 @@
 <blockquote>
 <p>virtual函数是动态绑定的，而缺省函数值却是静态绑定的。</p>
 </blockquote>
+<p><strong>默认参数的使用需要看指针或者引用本身的类型，而不是对象的类型</strong>。</p>
 <p>所以绝对不要重新定义一个继承而来的缺省参数值，因为缺省参数都是静态绑定的，而virtual函数是动态绑定。——《Effective C++ 条款37》</p>
 <p><strong>为什么不将缺省参数值也实现为动态绑定呢？</strong></p>
 <p>条款37中给出了解释：为了程序的执行速度和编译器实现上的简易度。</p>
