@@ -8,13 +8,15 @@
   <link rel="dns-prefetch" href="https://allybuli.github.io">
   <title>浅析内存管理 | 叶子的小本本</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="如何使用内存？">
+<meta property="og:type" content="article">
 <meta property="og:title" content="浅析内存管理">
 <meta property="og:url" content="https://allybuli.github.io/2021/11/27/%E6%B5%85%E6%9E%90%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/index.html">
 <meta property="og:site_name" content="叶子的小本本">
+<meta property="og:description" content="如何使用内存？">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-11-27T15:22:54.000Z">
-<meta property="article:modified_time" content="2021-11-28T12:10:21.295Z">
+<meta property="article:modified_time" content="2021-12-04T03:29:44.062Z">
 <meta property="article:author" content="ally">
 <meta name="twitter:card" content="summary">
   
@@ -164,7 +166,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="如何使用内存？"><a href="#如何使用内存？" class="headerlink" title="如何使用内存？"></a>如何使用内存？<a id="more"></a></h3><p>在讲内存管理之前，先讨论如何将内存利用起来？</p>
+<blockquote>
+<p>将程序放到内存中，PC指向开始地址</p>
+</blockquote>
+<p>程序中的地址都是相对地址，那如何让PC正确的移动呢？</p>
+<blockquote>
+<p>我们需要进行地址重定位。</p>
+</blockquote>
+<h3 id="地址重定位"><a href="#地址重定位" class="headerlink" title="地址重定位"></a>地址重定位</h3><p>编译或载入时都可以进行地址重定位。</p>
+<ul>
+<li><p>编译时重定位后，程序就只能放到内存的固定位置。</p>
+</li>
+<li><p>载入时重定位后，程序一旦载入内存就不能动了。</p>
+</li>
+</ul>
+<p>是因为这两种简单的重定位，都只进行一次重定位，即一次将所有地址都进行重定位，地址便固定下来了。存在很大的弊端。</p>
+
       
 
       
@@ -300,7 +318,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%86%85%E5%AD%98%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">如何使用内存？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E9%87%8D%E5%AE%9A%E4%BD%8D"><span class="toc-number">2.</span> <span class="toc-text">地址重定位</span></a></li></ol>
                     </div>
                 </span>
             </div>
