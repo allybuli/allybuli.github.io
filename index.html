@@ -164,7 +164,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="什么是僵尸进程"><a href="#什么是僵尸进程" class="headerlink" title="什么是僵尸进程"></a>什么是僵尸进程</h3><p><strong>一个进程使用 fork() 创建子进程，子进程任务执行完成并退出，但在操作系统的进程表中仍然存在其进程控制块。这种处于‘’终止状态‘‘的子进程称为僵尸进程。</strong>
+        <h3 id="什么是僵尸进程"><a href="#什么是僵尸进程" class="headerlink" title="什么是僵尸进程"></a>什么是僵尸进程</h3><p><strong>一个进程使用 fork() 创建子进程，子进程任务执行完成并退出，但在操作系统的进程表中仍然存在其进程控制块。这种处于”终止状态”的子进程称为僵尸进程。</strong>
         
       
 
@@ -178,69 +178,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/12/08/%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-cpp中的RAII的简单介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/07/cpp%E4%B8%AD%E7%9A%84RAII%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/">cpp中的RAII机制</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/07/cpp%E4%B8%AD%E7%9A%84RAII%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/" class="archive-article-date">
-  	<time datetime="2021-12-07T15:41:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>RAII（Resource Acquisition Is Initialization），资源获取就是初始化。
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/07/cpp%E4%B8%AD%E7%9A%84RAII%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/">展开全文 >></a>
         </p>
       
 
@@ -290,6 +227,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        <p>RAII（Resource Acquisition Is Initialization），资源获取就是初始化。
         
       
 
@@ -745,6 +683,70 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/11/26/%E4%BB%8E%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%88%B0%E6%9C%AC%E5%9C%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-volatile关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/26/volatile%E5%85%B3%E9%94%AE%E5%AD%97/">volatile关键字</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/26/volatile%E5%85%B3%E9%94%AE%E5%AD%97/" class="archive-article-date">
+  	<time datetime="2021-11-26T01:16:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>C/C++ 中的 volatile 关键字和 const 对应，用来修饰变量，通常用于建立语言级别的 memory barrier。
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/26/volatile%E5%85%B3%E9%94%AE%E5%AD%97/">展开全文 >></a>
         </p>
       
 
