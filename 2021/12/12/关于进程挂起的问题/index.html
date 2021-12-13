@@ -6,19 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://allybuli.github.io">
-  <title>WEB前端开发——HTML基础 | 叶子的小本本</title>
+  <title>关于进程挂起的问题 | 叶子的小本本</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是简单学习了html语言后的笔记。整理在一起，以后就不用到处翻别人的了。学习的课程是慕课网里的一门课。">
+  <meta name="description" content="问题的开始是来源于群友的一个提问">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WEB前端开发——HTML基础">
-<meta property="og:url" content="https://allybuli.github.io/2021/01/30/WEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94HTML%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:title" content="关于进程挂起的问题">
+<meta property="og:url" content="https://allybuli.github.io/2021/12/12/%E5%85%B3%E4%BA%8E%E8%BF%9B%E7%A8%8B%E6%8C%82%E8%B5%B7%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="叶子的小本本">
-<meta property="og:description" content="这是简单学习了html语言后的笔记。整理在一起，以后就不用到处翻别人的了。学习的课程是慕课网里的一门课。">
+<meta property="og:description" content="问题的开始是来源于群友的一个提问">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-01-30T08:33:30.000Z">
-<meta property="article:modified_time" content="2021-03-03T08:37:45.777Z">
+<meta property="og:image" content="https://allybuli.github.io/images/process_hangs/process_hangs.jpg">
+<meta property="og:image" content="d:/study/blog/allybuli/source/images/process_status.jpg">
+<meta property="og:image" content="d:/study/blog/allybuli/source/images/process_status2.jpg">
+<meta property="article:published_time" content="2021-12-12T14:06:01.000Z">
+<meta property="article:modified_time" content="2021-12-13T03:23:39.605Z">
 <meta property="article:author" content="ally">
+<meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://allybuli.github.io/images/process_hangs/process_hangs.jpg">
   
     <link rel="alternative" href="/atom.xml" title="叶子的小本本" type="application/atom+xml">
   
@@ -146,232 +151,71 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-WEB前端开发——HTML基础" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-关于进程挂起的问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      WEB前端开发——HTML基础
+      关于进程挂起的问题
     </h1>
   
 
         
-        <a href="/2021/01/30/WEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94HTML%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2021-01-30T08:33:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-30</time>
+        <a href="/2021/12/12/%E5%85%B3%E4%BA%8E%E8%BF%9B%E7%A8%8B%E6%8C%82%E8%B5%B7%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2021-12-12T14:06:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这是简单学习了html语言后的笔记。整理在一起，以后就不用到处翻别人的了。<br>学习的课程是慕课网里的一门课。<a id="more"></a><br><a href=https://www.imooc.com/learn/9 target="_blank">课程页面</a></p>
-<h2 id="什么是HTML？"><a href="#什么是HTML？" class="headerlink" title="什么是HTML？"></a><font color=red>什么是HTML？</font></h2><p>HTML不是一种编程语言，而是一种标记语言，有着一套标记标签。HTML使用标记标签来描述网页。</p>
-<h2 id="标签的用途"><a href="#标签的用途" class="headerlink" title="标签的用途"></a><font color=red>标签的用途</font></h2><p>我们学习网页制作时，常常会听到一个词，语义化。那么什么叫做语义化呢，说的通俗点就是：明白每个标签的用途（在什么情况下使用此标签合理）比如，网页上的文章的标题就可以用标题标签，网页上的各个栏目的栏目名称也可以使用标题标签。文章中内容的段落就得放在段落标签中等等。<br>讲了这么多语义化，但是语义化可以给我们带来什么样的好处呢？</p>
-<ol>
-<li>更容易被搜索引擎收录。</li>
-<li>更容易让屏幕阅读器读出网页内容。</li>
-</ol>
-<h2 id="标签的语法"><a href="#标签的语法" class="headerlink" title="标签的语法"></a><font color=red>标签的语法</font></h2><p>1.标签由英文尖括号&lt;和&gt;括起来，如&lt; html &gt;就是一个标签。</p>
-<p>2.html中的标签一般都是成对出现的，分开始标签和结束标签。结束标签比开始标签多了一个/。</p>
-<blockquote>
-<p>如：<br>（1） &lt; p &gt;&lt;/ p&gt;<br>（2） &lt; div &gt;&lt;/ div&gt;<br>（3） &lt; span&gt;&lt;/ span&gt;</p>
-</blockquote>
-<p>3.标签与标签之间是可以嵌套的，但先后顺序必须保持一致，如：&lt; div&gt;里嵌套&lt; p&gt;，那么&lt; /p&gt;必须放在&lt; /div&gt;的前面。如下图所示。</p>
-<p>4.HTML标签不区分大小写，&lt; h1&gt;和&lt; H1&gt;是一样的，但建议小写，因为大部分程序员都以小写为准。</p>
-<h2 id="HTML5文档结构"><a href="#HTML5文档结构" class="headerlink" title="HTML5文档结构"></a><font color=red>HTML5文档结构</font></h2><ol>
-<li>&lt; !DOCTYPE html&gt;:文档类型声明，表示该文件为 HTML5文件。&lt;!DOCTYPE&gt; 声明必须是 HTML 文档的第一行，位于 &lt; html&gt; 标签之前。</li>
-<li>&lt; html&gt;&lt; /html&gt;标签对：&lt; html&gt;标签位于HTML文档的最前面，用来标识HTML文档的开始；&lt; /html&gt;标签位于HTML文档的最后面，用来标识HTML 文档的结束；这两个标签对成对存在，中间的部分是文档的头部和主题。</li>
-<li>&lt; head&gt;&lt; /head&gt;标签对：标签包含有关HTML文档的信息，可以包含一些辅助性标签。如&lt; title&gt;&lt; /title&gt;，&lt; link /&gt;&lt; meta /&gt;，&lt; style&gt;&lt; /style&gt;，&lt; script&gt;&lt; /script&gt;等，但是浏览器除了会在标题栏显示&lt; title&gt;元素的内容外，不会向用户显示head元素内的其他任何内容。</li>
-<li>&lt; body&gt;&lt; /body&gt;标签对：它是HTML文档的主体部分，在此标签中可以包含&lt; p&gt;&lt; h1&gt;&lt; br&gt;等众多标签，&lt; body&gt;标签出现在&lt; /head&gt;标签之后，且必须在闭标签&lt; /html&gt;之前闭合。</li>
-</ol>
-<h2 id="HTML各标签的使用"><a href="#HTML各标签的使用" class="headerlink" title="HTML各标签的使用"></a><font color=red>HTML各标签的使用</font></h2><h3 id="head标签"><a href="#head标签" class="headerlink" title="head标签"></a><font color=purple>head标签</font></h3><p>文档的头部描述了文档的各种属性和信息，包括文档的标题等，绝大多数文档头部包含的数据都不会真正作为内容显示给读者。<br>下面这些标签可用在 head 部分：</p>
-<ol>
-<li>head标签为双标签，有尾标签，&lt; head&gt;&lt; /head&gt;。</li>
-<li>head标签表示头部标签,通常用来嵌套meta、title、style等标签。</li>
-<li>&lt; title&gt;标签：在&lt; title&gt;和&lt; /title&gt;标签之间的文字内容是网页的标题信息，它会出现在浏览器的标题栏中。网页的title标签用于告诉用户和搜索引擎这个网页的主要内容是什么，搜索引擎可以通过网页标题，迅速的判断出网页的主题。每个网页的内容都是不同的，每个网页都应该有一个独一无二的title。</li>
-<li>&lt; meta charset=”UTF-8”&gt;设置当前文件字符编码</li>
-<li>style标签：双标签中设置当前文件样式<h3 id="body标签"><a href="#body标签" class="headerlink" title="body标签"></a><font color=purple>body标签</font></h3>在网页上要展示出来的页面内容一定要放在body标签中。即body标签中的内容会在浏览器中显示出来。<h3 id="HTML文件注释"><a href="#HTML文件注释" class="headerlink" title="HTML文件注释"></a><font color=purple>HTML文件注释</font></h3>语法：<blockquote>
-<p>&lt; !–注释文字 –&gt;</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="span标签"><a href="#span标签" class="headerlink" title="span标签"></a><font color=purple>span标签</font></h3><p>&lt; span&gt;标签是没有语义的，它的作用就是为了设置单独的样式用的。结合CSS使用的。<br>语法：</p>
-<blockquote>
-<p>&lt; span&gt;文本&lt; /span&gt;</p>
-</blockquote>
-<h3 id="换行标签"><a href="#换行标签" class="headerlink" title="换行标签"></a><font color=purple>换行标签</font></h3><p>在 html 代码中输入回车、空格都是没有作用的。在html文本中想输入回车换行，就必须输入&lt; br/&gt;。<br>&lt; br/&gt;标签作用相当于word文档中的回车。<br>语法：</p>
-<blockquote>
-<p>&lt; br/&gt;</p>
-</blockquote>
-<p>&lt; br/&gt;标签是一个空标签，没有HTML内容的标签就是空标签，空标签只需要写一个开始标签，这样的标签有&lt; br/&gt;、&lt; hr/&gt;和&lt; img/&gt;。</p>
-<h3 id="空格标签"><a href="#空格标签" class="headerlink" title="空格标签"></a><font color=purple>空格标签</font></h3><p>在html代码中输入空格、回车都是没有作用的。要想输入空格，必须写入<font color=green>&amp; nbsp;</font>。</p>
-<h3 id="水平线标签"><a href="#水平线标签" class="headerlink" title="水平线标签"></a><font color=purple>水平线标签</font></h3><p>语法：</p>
-<blockquote>
-<p>&lt; hr/&gt;</p>
-</blockquote>
-<p><font color=green>注意:</font></p>
-<ol>
-<li>&lt; hr/&gt;标签和&lt; br/&gt;标签一样也是一个空标签，所以只有一个开始标签，没有结束标签。</li>
-<li>&lt; hr/&gt;标签的在浏览器中的默认样式线条比较粗，颜色为灰色。</li>
-</ol>
-<h3 id="标题标签"><a href="#标题标签" class="headerlink" title="标题标签"></a><font color=purple>标题标签</font></h3><p>标题标签一共有6个，h1、h2、h3、h4、h5、h6分别为一级标题、二级标题、三级标题、四级标题、五级标题、六级标题。并且依据重要性递减。&lt; h1&gt;是最高的等级。标题标签的样式都会加粗。</p>
-<p>语法：</p>
-<blockquote>
-<p>&lt; hx&gt;标题文本&lt; /hx&gt; (x为1-6)</p>
-</blockquote>
-<p><font color=green>注意:</font><br>因为h1标签在网页中比较重要，所以一般h1标签被用在网站名称上。腾讯网站就是这样做的。如：&lt; h1&gt;腾讯网&lt; /h1&gt;</p>
-<h3 id="段落标签"><a href="#段落标签" class="headerlink" title="段落标签"></a><font color=purple>段落标签</font></h3><p>如果想在网页上显示文章，这时就需要&lt; p&gt;标签了，把文章的段落放到&lt; p&gt;标签中。&lt; p&gt;标签的默认样式，段前段后都会有空白。<br>语法：</p>
-<blockquote>
-<p>&lt; p&gt;段落文本&lt; /p&gt;</p>
-</blockquote>
-<p> 注意一段文字一个&lt; p&gt;标签，如在一篇新闻文章中有3段文字，就要把这3个段落分别放到3个&lt; p&gt;标签中。</p>
-<h3 id="列表标签"><a href="#列表标签" class="headerlink" title="列表标签"></a><font color=purple>列表标签</font></h3><h4 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a><font color=blue>无序列表</font></h4><p>无序列表可以使用ul-li标签来完成。ul-li是没有前后顺序的信息列表。<br>语法：</p>
-<blockquote>
-<p>&lt; ul&gt;<br> &nbsp;&nbsp; &lt; li&gt;信息&lt; /li&gt;<br> &nbsp;&nbsp; &lt; li&gt;信息&lt; /li&gt;<br> &nbsp;&nbsp; ……<br>&lt; /ul&gt;</p>
-</blockquote>
-<h4 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a><font color=blue>有序列表</font></h4><p>有序列表可以使用ol-li标签来完成。ol-li是有前后顺序的信息列表。</p>
-<p>语法：</p>
-<blockquote>
-<p>&lt; ol&gt;<br>&nbsp;&nbsp; &lt; li&gt;信息&lt; /li&gt;<br>&nbsp;&nbsp; &lt; li&gt;信息&lt; /li&gt;<br>&nbsp;&nbsp;  ……<br>&lt; /ol&gt;</p>
-</blockquote>
-<h3 id="图片标签"><a href="#图片标签" class="headerlink" title="图片标签"></a><font color=purple>图片标签</font></h3><p>在网页的制作中为使网页炫丽美观，肯定是缺少不了图片，可以使用&lt; img&gt;标签来插入图片。</p>
-<p>语法：</p>
-<blockquote>
-<p>&lt; img src=”图片地址” alt=”下载失败时的替换文本” title = “提示文本”&gt;</p>
-</blockquote>
-<p>举例：</p>
-<blockquote>
-<p>&lt; img src = “myimage.gif” alt = “My Image” title = “My Image” /&gt;</p>
-</blockquote>
-<p>说明：</p>
-<ol>
-<li>src：标识图像的位置；</li>
-<li>alt：指定图像的描述性文本，当图像不可见时（下载不成功时），可看到该属性指定的文本；</li>
-<li>title：提供在图像可见时对图像的描述(鼠标滑过图片时显示的文本)；</li>
-<li>图像可以是GIF，PNG，JPEG格式的图像文件。</li>
-</ol>
-<h3 id="超链接标签"><a href="#超链接标签" class="headerlink" title="超链接标签"></a><font color=purple>超链接标签</font></h3><p>使用&lt; a&gt;标签可实现超链接，它在网页制作中可以说是无处不在，只要有链接的地方，就会有这个标签。</p>
-<p>语法：</p>
-<blockquote>
-<p>&lt; a  href=”目标网址”  title=”鼠标滑过显示的文本”&gt;链接显示的文本&lt; /a&gt;</p>
-</blockquote>
-<p>举例：</p>
-<blockquote>
-<p>&lt; a  href=”<a target="_blank" rel="noopener" href="http://www.imooc.com&quot;/">http://www.imooc.com&quot;</a>  title=”点击进入慕课网”&gt;click here!&lt; /a&gt;</p>
-</blockquote>
-<p>上面例子作用是单击click here!文字，网页链接到 http:// www .imooc.com 这个网页。</p>
-<p>title属性的作用，鼠标滑过链接文字时会显示这个属性的文本内容。这个属性在实际网页开发中作用很大，主要方便搜索引擎了解链接地址的内容（语义化更友好），如右侧案例代码（11-13行）。</p>
-<p>a标签有的target属性，代表打开网页的方式。可选值为”_self和_blank”，默认值为_self，代表在当前页面打开链接，_blank代表在新窗口打开链接。</p>
-<p><font color=green>注意：</font>默认情况下，只要为文本加入a标签后，文字的颜色就会自动变为蓝色（被点击过的文本颜色为紫色）。</p>
-<h3 id="表格标签"><a href="#表格标签" class="headerlink" title="表格标签"></a><font color=purple>表格标签</font></h3><h4 id="创建表格"><a href="#创建表格" class="headerlink" title="创建表格"></a><font color=blue>创建表格</font></h4><p>语法：</p>
-<blockquote>
-<p>&lt; table&gt;<br>&nbsp;&nbsp;  &lt; tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;  &lt; th&gt;&lt; /th&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;     …<br>&nbsp;&nbsp;&nbsp;&nbsp;      &lt; th&gt;&lt; /th&gt;<br>&nbsp;&nbsp;  &lt; /tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;  …<br>&nbsp;&nbsp;  &lt; tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;      &lt; td&gt;&lt; /td&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;      …<br>&nbsp;&nbsp;&nbsp;&nbsp;     &lt; td&gt;&lt; /td&gt;<br>&nbsp;&nbsp;  &lt; /tr&gt;<br>&lt; /table&gt;</p>
-</blockquote>
-<p>创建表格的四个元素：table、tr、th、td</p>
-<ol>
-<li>&lt; table&gt;…&lt; /table&gt;：整个表格以&lt; table&gt;标记开始、&lt; /table&gt;标记结束。</li>
-<li>&lt; tr&gt;…&lt; /tr&gt;：表格的一行，所以有几对tr 表格就有几行。</li>
-<li>&lt; td&gt;…&lt; /td&gt;：表格的一个单元格，一行中包含几对&lt; td&gt;…&lt; /td&gt;，说明一行中就有几列。</li>
-<li>&lt; th&gt;…&lt; /th&gt;：表格的头部的一个单元格，表格表头。即表格的第一行的一个单元格，一般表示表格中这列数据的属性。</li>
-<li>表格中列的个数，取决于一行中数据单元格的个数。</li>
-<li>border属性可以为表格添加边框，属性值为数字。</li>
-</ol>
-<p><font color=green>注意：</font></p>
-<ol>
-<li>table标签用来定义整个表格，为双标签，必须有结束标签。</li>
-<li>table标签里面可以放caption标签和tr标签。</li>
-<li>caption标签用来定义表格的标题。</li>
-<li>tr标签用来设置表格的行，tr里面只能放th或者td标签，一组tr标签代表一行。</li>
-<li>th用来设置表格的标题，会加粗居中显示。也就是th标签中的文本默认为粗体并且居中显示。</li>
-<li>td同来设置表格的列，一组td标签代表一列。</li>
-<li>table表格在没有添加border属性之前, 在浏览器中显示是没有表格线的。</li>
-</ol>
-<h4 id="表格标题"><a href="#表格标题" class="headerlink" title="表格标题"></a><font color=blue>表格标题</font></h4><p>&lt; caption&gt;指定表格标题，它显示在表格的上方。</p>
-<p>语法：</p>
-<blockquote>
-<p>&lt; table&gt;<br>&lt; caption&gt;标题文本&lt; /caption&gt;<br>&nbsp;&nbsp;  &lt; tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;  &lt; th&gt;&lt; /th&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;     …<br>&nbsp;&nbsp;&nbsp;&nbsp;      &lt; th&gt;&lt; /th&gt;<br>&nbsp;&nbsp;  &lt; /tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;  …<br>&nbsp;&nbsp;  &lt; tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;      &lt; td&gt;&lt; /td&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;      …<br>&nbsp;&nbsp;&nbsp;&nbsp;     &lt; td&gt;&lt; /td&gt;<br>&nbsp;&nbsp;  &lt; /tr&gt;<br>&lt; /table&gt;</p>
-</blockquote>
-<h3 id="表单标签"><a href="#表单标签" class="headerlink" title="表单标签"></a><font color=purple>表单标签</font></h3><p>网站怎样与用户进行交互？答案是使用HTML表单(form)。表单是可以把浏览者输入的数据传送到服务器端，这样服务器端程序就可以处理表单传过来的数据。</p>
-<p>语法：</p>
-<blockquote>
-<p>&lt; form   method=”传送方式”   action=”服务器文件”&gt;</p>
-</blockquote>
-<p>说明：</p>
-<ol>
-<li>&lt; form&gt; ：&lt; form&gt;标签是成对出现的，以&lt; form&gt;开始，以&lt; /form&gt;结束。</li>
-<li>action ：浏览者输入的数据被传送到的地方,比如一个PHP页面(save.php)。</li>
-<li>method ： 数据传送的方式（get/post）。</li>
-</ol>
-<p><font color=green>注意:</font></p>
-<ol>
-<li>所有表单控件（文本框、文本域、按钮、单选框、复选框等）都必须放在 &lt; form&gt;&lt; /form&gt; 标签之间（否则用户输入的信息可提交不到服务器上哦！）。</li>
-<li>method : post/get 的区别这一部分内容属于后端程序员考虑的问题。</li>
-</ol>
-<h4 id="单行输入框"><a href="#单行输入框" class="headerlink" title="单行输入框"></a><font color=blue>单行输入框</font></h4><p>当用户要在表单中键入字母、数字等内容时，就会用到文本输入框。文本框也可以转化为密码输入框。</p>
-<p>语法：</p>
-<blockquote>
-<p>&lt; form&gt;<br>&nbsp;&nbsp;  &lt; input type=”text/password” name=”名称” value=”文本” /&gt;<br>&lt; /form&gt;</p>
-</blockquote>
-<p>说明：<br>1.type：<br>    当type=”text”时，输入框为文本输入框.<br>    当type=”password”时, 输入框为密码输入框。<br>    当type=”number”时, 输入框为数字输入框。则表示该输入框的类型为数字。数字框只能输入数字，输入其他字符无效。数字框最右侧会有一个加减符号,可以调整输入数字的大小,不同浏览器表现不一致。<br>    当type=”url”时, 输入框为网址输入框。数字框的值需以http://或者https://开头,且后面必须有内容,否则表单提交的时候会报错误提示。<br>    当type=”email”时, 输入框为邮箱输入框。数字框的值必须包含@。数字框的值@之后必须有内容,否则会报错误提示。<br>2.name：为输入框命名，以备后台程序ASP 、PHP使用。</p>
-<p>3.value：为输入框设置默认值。(一般起到提示作用)</p>
-<p>举例：</p>
-<blockquote>
-<p>&lt; form&gt;<br>&nbsp;&nbsp;  姓名：<br>&nbsp;&nbsp; &lt; input type=”text” name=”myName”&gt;<br>&nbsp;&nbsp; &lt; br/&gt;<br>&nbsp;&nbsp; 密码：<br>&nbsp;&nbsp; &lt; input type=”password” name=”pass”&gt;<br>&nbsp;&nbsp; 年龄：<br>&nbsp;&nbsp; &lt; input type=”number” name=”age”&gt;<br>&nbsp;&nbsp; 网站：<br>&nbsp;&nbsp; &lt; input type=”url” name=”myWebsite”&gt;<br>&nbsp;&nbsp; 邮箱：<br>&nbsp;&nbsp; &lt; input type=”email” name=”myEmail”&gt;<br>&lt; /form&gt;</p>
-</blockquote>
-<h4 id="intput标签中的占位符placeholder"><a href="#intput标签中的占位符placeholder" class="headerlink" title="intput标签中的占位符placeholder"></a><font color=blue>intput标签中的占位符placeholder</font></h4><p>input标签中占位符placeholder,属性，有时候需要提示用户输入框需要输入框的内容，那么就会用到我们的占位符。</p>
-<p>解释：</p>
-<ol>
-<li>placeholder属性为输入框占位符,里面可以放提示的输入信息。</li>
-<li>placeholder属性的值可以任意填写,当输入框输入内容时,占位符内容消失,输入框无内容时,占位符内容显示。</li>
-<li>占位符内容不是输入框真正的内容。</li>
-</ol>
-<h4 id="多行文本输入框"><a href="#多行文本输入框" class="headerlink" title="多行文本输入框"></a><font color=blue>多行文本输入框</font></h4><p>当用户需要在表单中输入大段文字时，需要用到文本输入域。</p>
-<p>语法：</p>
-<blockquote>
-<p>&lt; textarea rows=”行数” cols=”列数”&gt;&lt; /textarea&gt;</p>
-</blockquote>
-<p>举例：</p>
-<blockquote>
-<p>&lt; textarea rows=”10” cols=”50” placeholder=”请提出您的建议…”&gt;&lt; /textarea&gt;</p>
-</blockquote>
-<h4 id="使用label为input标签穿上衣服"><a href="#使用label为input标签穿上衣服" class="headerlink" title="使用label为input标签穿上衣服"></a><font color=blue>使用label为input标签穿上衣服</font></h4><p>label标签不会向用户呈现任何特殊效果，它的作用是为鼠标用户改进了可用性。如果你在 label 标签内点击文本，就会触发此控件。就是说，当用户单击选中该label标签时，浏览器就会自动将焦点转到和标签相关的表单控件上（就自动选中和该label标签相关连的表单控件上）。</p>
-<p>语法：</p>
-<blockquote>
-<p>&lt; label for=”控件id名称”&gt;</p>
-</blockquote>
-<p><font color=green>注意：</font>标签的 for 属性中的值应当与相关控件的 id 属性值一定要相同。这里控件要使用id属性，而不是name属性，id属性与name属性是不同的。这里一定要使用id属性，不然无法实现”转焦”的效果。</p>
-<p>例子：</p>
-<blockquote>
-<p>&lt; form<br>&nbsp;&nbsp; &lt; label for=”email”&gt;输入你的邮箱地址&lt; /label&gt;<br>&nbsp;&nbsp; &lt; input type=”email” id=”email” placeholder=”Enter email”&gt;<br>&lt; /form&gt;</p>
-</blockquote>
-<h4 id="选择框"><a href="#选择框" class="headerlink" title="选择框"></a><font color=blue>选择框</font></h4><p>在使用表单设计调查表时，为了减少用户的操作，使用选择框是一个好主意，html中有两种选择框，即单选框和复选框，两者的区别是单选框中的选项用户只能选择一项，而复选框中用户可以任意选择多项，甚至全选。</p>
-<p>语法：</p>
-<blockquote>
-<p>&lt; input   type=”radio/checkbox”   value=”值”    name=”名称”   checked=”checked”/&gt;</p>
-</blockquote>
-<p>说明：</p>
-<p>1.type:<br>   当 type=”radio” 时，控件为单选框<br>   当 type=”checkbox” 时，控件为复选框<br>2.value：提交数据到服务器的值（后台程序PHP使用）<br>3.name：为控件命名，以备后台程序 ASP、PHP 使用<br>4.checked：当设置 checked=”checked” 时，该选项被默认选中</p>
-<p><font color=green>注意</font>:同一组的单选按钮，name 取值一定要一致，比如上面例子为同一个名称“radioLove”，这样同一组的单选按钮才可以起到单选的作用。</p>
-<h4 id="下拉选择框"><a href="#下拉选择框" class="headerlink" title="下拉选择框"></a><font color=blue>下拉选择框</font></h4><p>下拉列表在网页中也常会用到，它可以有效的节省网页空间。既可以单选、又可以多选。</p>
-<p>说明：</p>
-<p>1.select和option标签都是双标签，它总是成对出现的，需要首标签和尾标签。<br>2.select标签里面只能放option标签，表示下拉列表的选项。<br>3.option标签放选项内容，不放置其他标签。<br>4.value：向服务器提交的值<br>5.selected=”selected”：设置selected=”selected”属性，则该选项就被默认选中。</p>
-<h4 id="按钮"><a href="#按钮" class="headerlink" title="按钮"></a><font color=blue>按钮</font></h4><p>在表单中有两种按钮可以使用，分别为：提交按钮、重置。</p>
-<p>当用户需要提交表单信息到服务器时，需要用到提交按钮。</p>
-<p>语法：</p>
-<blockquote>
-<p>&lt; input   type=”submit”   value=”提交”&gt;</p>
-</blockquote>
-<p>type：只有当type值设置为submit时，按钮才有提交作用</p>
-<p>value：按钮上显示的文字</p>
-<p>当用户需要重置表单信息到初始时的状态时，比如用户输入“用户名”后，发现书写有误，可以使用重置按钮使输入框恢复到初始状态。只需要把type设置为”reset”就可以。</p>
-<p>语法：</p>
-<blockquote>
-<p>&lt; input type=”reset” value=”重置”&gt;</p>
-</blockquote>
-<p>type：只有当type值设置为reset时，按钮才有重置作用</p>
-<p>value：按钮上显示的文字</p>
+        <p> 问题的开始是来源于群友的一个提问<a id="more"></a></p>
+<img src="/images/process_hangs/process_hangs.jpg" />
+
+<p>一开始，我以为这只是一个Time-wait状态导致的端口占用问题。测试了一下发现并不是因为Time-wait状态导致的。因为这里使用了ctrl+z停止了服务器端的运行。</p>
+<p>按下ctrl+z会发出 SIGTSTP 这个信号给正在终端运行的进程，进程收到这个信号后，默认动作是停止进程。<strong>即进程会被挂起。</strong></p>
+<p>进程一般被分为五个状态，分别是新建态、就绪态、运行态、阻塞态、终止态。</p>
+<p><img src="D:\study\blog\allybuli\source\images\process_status.jpg" alt="image-20211213091320955"></p>
+<p>加入挂起状态后就会变得复杂许多。</p>
+<p><img src="D:\study\blog\allybuli\source\images\process_status2.jpg"></p>
+<p>在没有了解进程挂起状态之前，对于进程挂起和进程阻塞等待的概念比较混淆，经常混为一谈。</p>
+<p>下面参考其他博主的文章分析一下它们之间的不同：</p>
+<p><strong>这一部分引用了 <a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_9fa53b5f0102vyuy.html">这篇文章</a></strong></p>
+<ul>
+<li>挂起是一种主动行为，因此恢复也应该要主动完成，而阻塞则是一种被动行为，是在等待事件或资源时任务的表现，你不知道他什么时候被阻塞(pend)，也就不能确切的知道他什么时候恢复阻塞。而且挂起队列在操作系统里可以看成一个，而阻塞队列则是不同的事件或资源（如信号量）就有自己的队列。</li>
+<li>阻塞（pend）就是任务释放CPU，其他任务可以运行，一般在等待某种资源或信号量的时候出现。挂起（suspend）不释放CPU，如果任务优先级高就永远轮不到其他任务运行，一般挂起用于程序调试中的条件中断，当出现某个条件的情况下挂起，然后进行单步调试。</li>
+<li>pend是task主动去等一个事件,或消息.suspend是直接悬挂task,以后这个task和你没任何关系,任何task间的通信或者同步都和这个suspended task没任何关系了,除非你resume task;</li>
+<li>任务调度是操作系统来实现的，任务调度时，直接忽略挂起状态的任务，但是会顾及处于pend下的任务，当pend下的任务等待的资源就绪后，就可以转为ready了。ready只需要等待CPU时间，当然，任务调度也占用开销，但是不大，可以忽略。可以这样理解，只要是挂起状态，操作系统就不在管理这个任务了。</li>
+<li>挂起是主动的，一般需要用挂起函数进行操作，若没有resume的动作，则此任务一直不会ready。而阻塞是因为资源被其他任务抢占而处于休眠态。两者的表现方式都是从就绪态里“清掉”，即对应标志位清零，只不过实现方式不一样。</li>
+</ul>
+<p><strong>通过ctrl+z可以主动挂起一个正在终端运行的进程。</strong></p>
+<p>回到最开始那个问题，下面给出测试代码，一个简单的UDP服务器端和客户端通信。</p>
+<p>udp_server.cpp</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fd = socket(PF_INET, SOCK_DGRAM, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span>(fd == <span class="number">-1</span>)&#123;</span><br><span class="line">        perror(<span class="string">&quot;socket&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    sockaddr_in saddr;</span><br><span class="line">    saddr.sin_family = AF_INET;</span><br><span class="line">    saddr.sin_port = htons(<span class="number">19999</span>);</span><br><span class="line">    saddr.sin_addr.s_addr = INADDR_ANY;</span><br><span class="line">    <span class="keyword">int</span> ret = bind(fd, (sockaddr*)&amp;saddr, <span class="keyword">sizeof</span>(saddr));</span><br><span class="line">    <span class="keyword">if</span>(ret == <span class="number">-1</span>)&#123;</span><br><span class="line">        perror(<span class="string">&quot;bind&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">char</span> recvBuf[<span class="number">1024</span>];</span><br><span class="line">    <span class="keyword">char</span> clientIP[<span class="number">16</span>];</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        sockaddr_in caddr;</span><br><span class="line">        <span class="keyword">int</span> len = <span class="keyword">sizeof</span>(caddr);</span><br><span class="line">        recvfrom(fd, recvBuf, <span class="keyword">sizeof</span>(recvBuf), <span class="number">0</span>, (sockaddr*)&amp;caddr, (<span class="keyword">socklen_t</span>*)&amp;len);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;client IP : %s, Port : %d\n&quot;</span>, </span><br><span class="line">        inet_ntop(AF_INET, &amp;caddr.sin_addr.s_addr, clientIP, <span class="keyword">sizeof</span>(clientIP)),</span><br><span class="line">        ntohs(caddr.sin_port));</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;client say : %s\n&quot;</span>, recvBuf);</span><br><span class="line">        <span class="comment">// 回传</span></span><br><span class="line">        sendto(fd, recvBuf, <span class="keyword">sizeof</span>(recvBuf), <span class="number">0</span>, (sockaddr*)&amp;caddr, <span class="keyword">sizeof</span>(caddr));</span><br><span class="line">    &#125;</span><br><span class="line">    close(fd);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>udp_client.cpp</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fd = socket(PF_INET, SOCK_DGRAM, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span>(fd == <span class="number">-1</span>)&#123;</span><br><span class="line">        perror(<span class="string">&quot;socket&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    sockaddr_in saddr;</span><br><span class="line">    saddr.sin_family = AF_INET;</span><br><span class="line">    saddr.sin_port = htons(<span class="number">19999</span>);</span><br><span class="line">    inet_pton(AF_INET, <span class="string">&quot;127.0.0.1&quot;</span>, &amp;saddr.sin_addr.s_addr);</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span> sendBuf[<span class="number">1024</span>] =&#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="built_in">sprintf</span>(sendBuf, <span class="string">&quot;hello, i am client %d\n&quot;</span>, num++);</span><br><span class="line">        <span class="comment">// udp套接字通信，调用sendto函数时自动分配IP和端口号</span></span><br><span class="line">        sendto(fd, sendBuf, <span class="built_in">strlen</span>(sendBuf) + <span class="number">1</span>, <span class="number">0</span>, (sockaddr*)&amp;saddr, <span class="keyword">sizeof</span>(saddr));</span><br><span class="line">        recvfrom(fd, sendBuf, <span class="keyword">sizeof</span>(sendBuf), <span class="number">0</span>, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;server say : %s\n&quot;</span>, sendBuf);</span><br><span class="line">        sleep(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    close(fd);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ udp_server.cpp -o server</span><br><span class="line">./server</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ udp_client.cpp -o client</span><br><span class="line">./client</span><br></pre></td></tr></table></figure>
+<p>ctrl+z 停止服务器端</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ally@ally-virtual-machine:~/project/NuiKeCpp/U4/P32$ ./server </span><br><span class="line">client IP : 127.0.0.1, Port : 40196</span><br><span class="line">client say : hello, i am client 0</span><br><span class="line"></span><br><span class="line">client IP : 127.0.0.1, Port : 40196</span><br><span class="line">client say : hello, i am client 1</span><br><span class="line"></span><br><span class="line">^Z</span><br><span class="line">[1]+  已停止               ./server</span><br></pre></td></tr></table></figure>
+<p>ctrl+c终止客户端</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ally@ally-virtual-machine:~/project/NuiKeCpp/U4/P32$ ./client </span><br><span class="line">server say : hello, i am client 0</span><br><span class="line"></span><br><span class="line">server say : hello, i am client 1</span><br><span class="line"></span><br><span class="line">^C</span><br><span class="line">ally@ally-virtual-machine:~/project/NuiKeCpp/U4/P32$ </span><br></pre></td></tr></table></figure>
+<p>再次运行服务器端，出现错误</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ally@ally-virtual-machine:~/project/NuiKeCpp/U4/P32$ ./server </span><br><span class="line">bind: Address already in use</span><br></pre></td></tr></table></figure>
+<p><code>ps au</code> 查看进程内存状况</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ally@ally-virtual-machine:~/project/NuiKeCpp/U4/P32$ ps au</span><br><span class="line">USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</span><br><span class="line">ally        3185  0.0  0.2  19636  5428 pts/4    Ss   09:45   0:00 /bin/bash</span><br><span class="line">ally        3735  0.0  0.0   5864  1792 pts/4    T    10:42   0:00 ./server</span><br><span class="line">ally        3751  0.0  0.2  19344  4924 pts/5    Ss+  10:42   0:00 /usr/bin/bash</span><br><span class="line">ally        4258  0.0  0.1  21008  3420 pts/4    R+   11:09   0:00 ps au</span><br></pre></td></tr></table></figure>
+<p>发现已存在./server，此时处于停止状态，依旧占有资源，没有释放。</p>
+<p>此时可以恢复进程执行，首先<code>jobs</code>：查看被挂起的程序工作号</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ally@ally-virtual-machine:~/project/NuiKeCpp/U4/P32$ jobs</span><br><span class="line">[1]+  已停止               ./server</span><br></pre></td></tr></table></figure>
+<p>然后**<code>fg</code>命令将挂起的作业放回到前台执行；用<code>bg</code>命令将挂起的作业放到后台执行**<br>格式：fg 工作号；bg 工作号</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ally@ally-virtual-machine:~/project/NuiKeCpp/U4/P32$ fg 1</span><br><span class="line">./server</span><br><span class="line">client IP : 127.0.0.1, Port : 40196</span><br><span class="line">client say : hello, i am client 2</span><br><span class="line"></span><br><span class="line">^C</span><br></pre></td></tr></table></figure>
+<p>客户端已终止，不再发送信息。ctrl+c终止服务器端。</p>
+<p><code>ps au</code> 查看进程内存状况</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ally@ally-virtual-machine:~/project/NuiKeCpp/U4/P32$ ps au</span><br><span class="line">USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</span><br><span class="line">ally        3185  0.0  0.2  19636  5428 pts/4    Ss   09:45   0:00 /bin/bash</span><br><span class="line">ally        3751  0.0  0.2  19344  4924 pts/5    Ss+  10:42   0:00 /usr/bin/bash</span><br><span class="line">ally        4508  0.0  0.1  21008  3296 pts/4    R+   11:18   0:00 ps au</span><br></pre></td></tr></table></figure>
+<p><strong>总结：进程挂起是主动的，操作系统不会自动恢复进程；进程阻塞是被动的，完成相应动作后，操作系统会自动恢复进程。</strong></p>
 
       
 
@@ -380,6 +224,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -430,7 +285,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2021/01/30/WEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94HTML%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2021/12/12/%E5%85%B3%E4%BA%8E%E8%BF%9B%E7%A8%8B%E6%8C%82%E8%B5%B7%E7%9A%84%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -444,18 +299,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/02/01/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E5%88%B0Github%E4%BB%93%E5%BA%93/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          将本地项目上传到Github仓库
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/01/24/%E6%A2%A6%E7%9A%84%E5%BC%80%E5%A7%8B/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">夢的開始</div>
+    <a href="/2021/12/09/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-IPC/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux进程间通信(IPC)</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -482,7 +328,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFHTML%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是HTML？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E7%9A%84%E7%94%A8%E9%80%94"><span class="toc-number">2.</span> <span class="toc-text">标签的用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">标签的语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML5%E6%96%87%E6%A1%A3%E7%BB%93%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text">HTML5文档结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML%E5%90%84%E6%A0%87%E7%AD%BE%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">HTML各标签的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#head%E6%A0%87%E7%AD%BE"><span class="toc-number">5.1.</span> <span class="toc-text">head标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#body%E6%A0%87%E7%AD%BE"><span class="toc-number">5.2.</span> <span class="toc-text">body标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML%E6%96%87%E4%BB%B6%E6%B3%A8%E9%87%8A"><span class="toc-number">5.3.</span> <span class="toc-text">HTML文件注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#span%E6%A0%87%E7%AD%BE"><span class="toc-number">5.4.</span> <span class="toc-text">span标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%A2%E8%A1%8C%E6%A0%87%E7%AD%BE"><span class="toc-number">5.5.</span> <span class="toc-text">换行标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E6%A0%BC%E6%A0%87%E7%AD%BE"><span class="toc-number">5.6.</span> <span class="toc-text">空格标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B0%B4%E5%B9%B3%E7%BA%BF%E6%A0%87%E7%AD%BE"><span class="toc-number">5.7.</span> <span class="toc-text">水平线标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E9%A2%98%E6%A0%87%E7%AD%BE"><span class="toc-number">5.8.</span> <span class="toc-text">标题标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AE%B5%E8%90%BD%E6%A0%87%E7%AD%BE"><span class="toc-number">5.9.</span> <span class="toc-text">段落标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E6%A0%87%E7%AD%BE"><span class="toc-number">5.10.</span> <span class="toc-text">列表标签</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="toc-number">5.10.1.</span> <span class="toc-text">无序列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="toc-number">5.10.2.</span> <span class="toc-text">有序列表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E6%A0%87%E7%AD%BE"><span class="toc-number">5.11.</span> <span class="toc-text">图片标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E9%93%BE%E6%8E%A5%E6%A0%87%E7%AD%BE"><span class="toc-number">5.12.</span> <span class="toc-text">超链接标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC%E6%A0%87%E7%AD%BE"><span class="toc-number">5.13.</span> <span class="toc-text">表格标签</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%A1%A8%E6%A0%BC"><span class="toc-number">5.13.1.</span> <span class="toc-text">创建表格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC%E6%A0%87%E9%A2%98"><span class="toc-number">5.13.2.</span> <span class="toc-text">表格标题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E5%8D%95%E6%A0%87%E7%AD%BE"><span class="toc-number">5.14.</span> <span class="toc-text">表单标签</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E8%A1%8C%E8%BE%93%E5%85%A5%E6%A1%86"><span class="toc-number">5.14.1.</span> <span class="toc-text">单行输入框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#intput%E6%A0%87%E7%AD%BE%E4%B8%AD%E7%9A%84%E5%8D%A0%E4%BD%8D%E7%AC%A6placeholder"><span class="toc-number">5.14.2.</span> <span class="toc-text">intput标签中的占位符placeholder</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E8%A1%8C%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E6%A1%86"><span class="toc-number">5.14.3.</span> <span class="toc-text">多行文本输入框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8label%E4%B8%BAinput%E6%A0%87%E7%AD%BE%E7%A9%BF%E4%B8%8A%E8%A1%A3%E6%9C%8D"><span class="toc-number">5.14.4.</span> <span class="toc-text">使用label为input标签穿上衣服</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%A1%86"><span class="toc-number">5.14.5.</span> <span class="toc-text">选择框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E6%8B%89%E9%80%89%E6%8B%A9%E6%A1%86"><span class="toc-number">5.14.6.</span> <span class="toc-text">下拉选择框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E9%92%AE"><span class="toc-number">5.14.7.</span> <span class="toc-text">按钮</span></a></li></ol></li></ol></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
