@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://allybuli.github.io">
-  <title>GDB学习笔记 | 叶子的小本本</title>
+  <title>Linux中的进程和线程 | 叶子的小本本</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="GDB是一个强大的调试工具，可以调试C、C++、objective-c、Go、Java等语言。学习教程">
+  <meta name="description" content="在Linux中不区分线程和进程，线程只是一种特殊的进程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GDB学习笔记">
-<meta property="og:url" content="https://allybuli.github.io/2021/08/22/GDB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="Linux中的进程和线程">
+<meta property="og:url" content="https://allybuli.github.io/2021/12/24/Linux%E4%B8%AD%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/index.html">
 <meta property="og:site_name" content="叶子的小本本">
-<meta property="og:description" content="GDB是一个强大的调试工具，可以调试C、C++、objective-c、Go、Java等语言。学习教程">
+<meta property="og:description" content="在Linux中不区分线程和进程，线程只是一种特殊的进程。">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-08-22T04:21:07.000Z">
-<meta property="article:modified_time" content="2021-10-26T12:58:36.283Z">
+<meta property="article:published_time" content="2021-12-24T03:37:39.000Z">
+<meta property="article:modified_time" content="2021-12-24T05:55:06.876Z">
 <meta property="article:author" content="ally">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="叶子的小本本" type="application/atom+xml">
@@ -146,223 +147,30 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-GDB学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Linux中的进程和线程" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      GDB学习笔记
+      Linux中的进程和线程
     </h1>
   
 
         
-        <a href="/2021/08/22/GDB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2021-08-22T04:21:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-22</time>
+        <a href="/2021/12/24/Linux%E4%B8%AD%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2021-12-24T03:37:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>GDB是一个强大的调试工具，可以调试C、C++、objective-c、Go、Java等语言。<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EK411g7Li">学习教程</a>  <a id="more"></a></p>
-<h3 id="Debug方式编译"><a href="#Debug方式编译" class="headerlink" title="Debug方式编译"></a><strong>Debug方式编译</strong></h3><p>编译时打开调试选项 -g（-g选项的作用是在可执行文件中加入源代码的信息，如：可执行文件中第几条机器指令对应源代码的第几行）  </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ test.cpp -o test -g</span><br></pre></td></tr></table></figure>
-<h3 id="GDB常用命令"><a href="#GDB常用命令" class="headerlink" title="GDB常用命令"></a><strong>GDB常用命令</strong></h3><table>
-<thead>
-<tr>
-<th align="left">功能</th>
-<th align="left">命令</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">启动和退出</td>
-<td align="left">gdb 可执行程序 <br> quit/q</td>
-</tr>
-<tr>
-<td align="left">给程序设置参数/获取设置参数</td>
-<td align="left">set args 10 20<br> show args</td>
-</tr>
-<tr>
-<td align="left">GDB使用帮助</td>
-<td align="left">help</td>
-</tr>
-<tr>
-<td align="left">查看当前文件代码</td>
-<td align="left">list/l（从默认位置显示）<br> list/l 行号（从指定的行显示）<br> list/l 函数名（从指定的函数显示）</td>
-</tr>
-<tr>
-<td align="left">查看非当前文件代码</td>
-<td align="left">list/l 文件名:行号 <br> list/l 文件名:函数名</td>
-</tr>
-<tr>
-<td align="left">设置显示的行数</td>
-<td align="left">show list/listsize <br> set list/listsize 行数</td>
-</tr>
-<tr>
-<td align="left">设置断点</td>
-<td align="left">b/break 行号 <br> b/break 函数名 <br> b/break 文件名:行号 <br> b/break 文件名:函数</td>
-</tr>
-<tr>
-<td align="left">查看断点</td>
-<td align="left">i/info b/break</td>
-</tr>
-<tr>
-<td align="left">删除断点</td>
-<td align="left">d/del/delete 断点编号</td>
-</tr>
-<tr>
-<td align="left">设置断点无效</td>
-<td align="left">dis/disable 断点编号</td>
-</tr>
-<tr>
-<td align="left">设置断点生效</td>
-<td align="left">ena/enable 断点编号</td>
-</tr>
-<tr>
-<td align="left">设置条件断点（一般用在循环的位置）</td>
-<td align="left">b/break 10 if i==5</td>
-</tr>
-<tr>
-<td align="left">运行GDB程序</td>
-<td align="left">start（程序停在第一行）<br> run（遇到断点才停）</td>
-</tr>
-<tr>
-<td align="left">继续运行，到下一个断点停</td>
-<td align="left">c/continue</td>
-</tr>
-<tr>
-<td align="left">向下执行一行代码（不会进入函数体）</td>
-<td align="left">n/next</td>
-</tr>
-<tr>
-<td align="left">变量操作</td>
-<td align="left">p/print 变量名（打印变量值）<br> ptype 变量名（打印变量类型）</td>
-</tr>
-<tr>
-<td align="left">向下单步调试（遇到函数进入函数体）</td>
-<td align="left">s/step <br> finish（跳出函数体）</td>
-</tr>
-<tr>
-<td align="left">自动变量操作</td>
-<td align="left">display 变量名（自动打印指定变量的值）<br> i/info display <br> undisplay 编号</td>
-</tr>
-<tr>
-<td align="left">其它操作</td>
-<td align="left">set var 变量名 = 变量值（循环中用的较多）<br> until（跳出循环）</td>
-</tr>
-</tbody></table>
-<h3 id="简单测试"><a href="#简单测试" class="headerlink" title="简单测试"></a>简单测试</h3><p>测试代码 test.cpp</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> start = <span class="number">1</span>,<span class="keyword">const</span> <span class="keyword">int</span> end = <span class="number">5</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt;= end; ++i)&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;hello world&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    print(<span class="number">1</span>,<span class="number">5</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>1.编译</p>
-<blockquote>
-<p>g++ test.cpp -o test -g</p>
+        <blockquote>
+<p>在Linux中不区分线程和进程，线程只是一种特殊的进程。<a id="more"></a></p>
 </blockquote>
-<p>2.通过GDB启动程序</p>
-<blockquote>
-<p>gdb test</p>
-</blockquote>
-<p>3.进行GDB调试 <font color=green>(点击小标题可查看shell编码)</font></p>
-<details>
-<summary><font color=blue>>3.1 查看源代码</font></summary>
-<pre><code> 
-(gdb) list
-1       #include<iostream>
-2       using namespace std;
-3
-4       void print(const int start,const int end)&#123;
-5               for(int i = start; i <= end; ++i)&#123;
-6                       std::cout << i << " ";
-7               &#125;
-8       &#125;
-9
-10      int main()
-(gdb) list
-11      &#123;
-12              cout << "hello world" << endl;
-13              print(1,5);
-14              return 0;
-15      &#125;
-(gdb) 
-Line number 16 out of range; test.cpp has 15 lines.
-</code></pre>
-</details>
 
-<details>
-<summary><font color=blue>>3.2 打断点</font></summary>
-<pre><code> 
-(gdb) b 12
-Breakpoint 1 at 0x121a: file test.cpp, line 12.
-(gdb) b 13
-Breakpoint 2 at 0x1242: file test.cpp, line 13.
-(gdb) info b
-Num     Type           Disp Enb Address            What
-1       breakpoint     keep y   0x000000000000121a in main() at test.cpp:12
-2       breakpoint     keep y   0x0000000000001242 in main() at test.cpp:13
-</code></pre>
-</details>
-
-<details>
-<summary><font color=blue>>3.3 运行程序</font></summary>
-<pre><code> 
-(gdb) run
-Starting program: /home/ally/code/c++/test
-Breakpoint 1, main () at test.cpp:12
-12              cout << "hello world" << endl;
-</code></pre>
-</details>
-
-<details>
-<summary><font color=blue>>3.4 单步执行</font></summary>
-<pre><code> 
-(gdb) s
-hello world
-Breakpoint 2, main () at test.cpp:13
-13              print(1,5);
-(gdb) s
-print (start=0, end=0) at test.cpp:4
-4       void print(const int start,const int end)&#123;
-(gdb) s
-5               for(int i = start; i <= end; ++i)&#123;
-</code></pre>
-</details>
-
-<details>
-<summary><font color=blue>>3.5 打印变量</font></summary>
-<pre><code> 
-(gdb) s
-5               for(int i = start; i <= end; ++i)&#123;
-(gdb) print i
-$2 = 1
-(gdb) s
-6                       std::cout << i << " ";
-(gdb) s
-5               for(int i = start; i <= end; ++i)&#123;
-(gdb) print i
-$3 = 2
-</code></pre>
-</details>
-
-<details>
-<summary><font color=blue>>3.6 多步执行</font></summary>
-<pre><code> 
-(gdb) c
-Continuing.
-1 2 3 4 5 [Inferior 1 (process 18691) exited normally]
-(gdb) print i
-No symbol "i" in current context.
-</code></pre>
-</details>
-
-<details>
-<summary><font color=blue>>3.7 退出GDB调试</font></summary>
-<pre><code> 
-(gdb) n
-The program is not being run.
-(gdb) quit
-</code></pre>
-</details>
       
 
       
@@ -370,6 +178,17 @@ The program is not being run.
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -420,7 +239,7 @@ The program is not being run.
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2021/08/22/GDB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2021/12/24/Linux%E4%B8%AD%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -434,18 +253,18 @@ The program is not being run.
   
 <nav id="article-nav">
   
-    <a href="/2021/08/23/Makefile%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/12/29/%E5%86%99%E4%B8%80%E4%B8%AA%E5%9C%A8%E7%BA%BF%E8%BF%90%E8%A1%8CC-%E4%BB%A3%E7%A0%81%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8-%E4%B8%80/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          makefile学习笔记
+          写一个在线运行C++代码的编辑器(一)
         
       </div>
     </a>
   
   
-    <a href="/2021/08/19/%E5%85%B3%E4%BA%8Evscode%E4%BD%BF%E7%94%A8remote-ssh%E8%BF%9E%E6%8E%A5%E8%BF%9C%E7%A8%8B-error-%E8%BF%87%E7%A8%8B%E8%AF%95%E5%9B%BE%E5%86%99%E5%85%A5%E7%9A%84%E7%AE%A1%E9%81%93%E4%B8%8D%E5%AD%98%E5%9C%A8-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">关于vscode使用remote-ssh连接远程(error:过程试图写入的管道不存在)的解决方法</div>
+    <a href="/2021/12/23/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E7%9A%84%E5%AE%9E%E7%8E%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">智能指针的实现</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -472,7 +291,7 @@ The program is not being run.
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Debug%E6%96%B9%E5%BC%8F%E7%BC%96%E8%AF%91"><span class="toc-number">1.</span> <span class="toc-text">Debug方式编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GDB%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">GDB常用命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%B5%8B%E8%AF%95"><span class="toc-number">3.</span> <span class="toc-text">简单测试</span></a></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>

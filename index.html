@@ -144,6 +144,227 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-UDP中一个包的大小最大为多大" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/31/UDP%E4%B8%AD%E4%B8%80%E4%B8%AA%E5%8C%85%E7%9A%84%E5%A4%A7%E5%B0%8F%E6%9C%80%E5%A4%A7%E4%B8%BA%E5%A4%9A%E5%A4%A7/">UDP中一个包的大小最大为多大</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/31/UDP%E4%B8%AD%E4%B8%80%E4%B8%AA%E5%8C%85%E7%9A%84%E5%A4%A7%E5%B0%8F%E6%9C%80%E5%A4%A7%E4%B8%BA%E5%A4%9A%E5%A4%A7/" class="archive-article-date">
+  	<time datetime="2021-12-31T02:34:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>转载文章，<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000017959319">原文章</a></p>
+</blockquote>
+<p>因为UDP数据传输的无连接特性，最简单的UDP数据传输就是一次数据交互一个UDP包搞定，这样就不用管分包问题。</p>
+<h4 id="局域网环境下，建议将UDP数据控制在1472字节以下"><a href="#局域网环境下，建议将UDP数据控制在1472字节以下" class="headerlink" title="局域网环境下，建议将UDP数据控制在1472字节以下"></a>局域网环境下，建议将UDP数据控制在1472字节以下</h4><p>以太网(Ethernet)数据帧的长度必须在46-1500字节之间,<strong>这是由以太网的物理特性决定的，这个1500字节被称为链路层的MTU(最大传输单元)。</strong> 但这并不是指链路层的长度被限制在1500字节，其实这这个MTU指的是链路层的数据区，并不包括链路层的首部和尾部的18个字节。</p>
+<p>所以，事实上这个1500字节就是网络层IP数据报的长度限制。因为IP数据报的首部为20字节，所以IP数据报的数据区长度最大为1480字节。而这个<strong>1480字节就是用来放TCP传来的TCP报文段或UDP传来的UDP数据报的。</strong></p>
+<p><strong>又因为UDP数据报的首部8字节，所以UDP数据报的数据区最大长度为1472字节。这个1472字节就是我们可以使用的字节数</strong></p>
+<h4 id="当我们发送的UDP数据大于1472的时候会怎样呢？"><a href="#当我们发送的UDP数据大于1472的时候会怎样呢？" class="headerlink" title="当我们发送的UDP数据大于1472的时候会怎样呢？"></a>当我们发送的UDP数据大于1472的时候会怎样呢？</h4><p>这也就是说IP数据报大于1500字节，大于MTU，这个时候发送方IP层就需要分片(fragmentation)。把数据报分成若干片，使每一片都小于MTU，而接收方IP层则需要进行数据报的重组。这样就会多做许多事情，而更严重的是，由于UDP的特性，当某一片数据传送中丢失时，接收方无法重组数据报，将导致丢弃整个UDP数据报。</p>
+<p>因此，在普通的局域网环境下，我建议将UDP的数据控制在1472字节以下为好。</p>
+<h4 id="Internet编程时，建议将UDP数据控制在548字节以下"><a href="#Internet编程时，建议将UDP数据控制在548字节以下" class="headerlink" title="Internet编程时，建议将UDP数据控制在548字节以下"></a>Internet编程时，建议将UDP数据控制在548字节以下</h4><p>Internet上的标准MTU值为576字节。</p>
+<p><strong>unix网络编程第一卷里说：ipv4协议规定ip层的最小重组缓冲区大小为576！所以，建议udp包不要超过这个大小，而不是因为internet的标准MTU是576！</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/31/UDP%E4%B8%AD%E4%B8%80%E4%B8%AA%E5%8C%85%E7%9A%84%E5%A4%A7%E5%B0%8F%E6%9C%80%E5%A4%A7%E4%B8%BA%E5%A4%9A%E5%A4%A7/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-写一个在线运行C-代码的编辑器-一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/29/%E5%86%99%E4%B8%80%E4%B8%AA%E5%9C%A8%E7%BA%BF%E8%BF%90%E8%A1%8CC-%E4%BB%A3%E7%A0%81%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8-%E4%B8%80/">写一个在线运行C++代码的编辑器(一)</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/29/%E5%86%99%E4%B8%80%E4%B8%AA%E5%9C%A8%E7%BA%BF%E8%BF%90%E8%A1%8CC-%E4%BB%A3%E7%A0%81%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8-%E4%B8%80/" class="archive-article-date">
+  	<time datetime="2021-12-29T06:10:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/29/%E5%86%99%E4%B8%80%E4%B8%AA%E5%9C%A8%E7%BA%BF%E8%BF%90%E8%A1%8CC-%E4%BB%A3%E7%A0%81%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8-%E4%B8%80/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux中的进程和线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/24/Linux%E4%B8%AD%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/">Linux中的进程和线程</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/24/Linux%E4%B8%AD%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2021-12-24T03:37:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>在Linux中不区分线程和进程，线程只是一种特殊的进程。
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/24/Linux%E4%B8%AD%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-智能指针的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -622,195 +843,6 @@
 
 
   
-    <article id="post-判断字节序-大端-小端" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/05/%E5%88%A4%E6%96%AD%E5%AD%97%E8%8A%82%E5%BA%8F-%E5%A4%A7%E7%AB%AF-%E5%B0%8F%E7%AB%AF/">判断字节序(大端/小端)</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/05/%E5%88%A4%E6%96%AD%E5%AD%97%E8%8A%82%E5%BA%8F-%E5%A4%A7%E7%AB%AF-%E5%B0%8F%E7%AB%AF/" class="archive-article-date">
-  	<time datetime="2021-12-05T08:46:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>CPU向内存保存数据的方式有两种，大端和小端。
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/05/%E5%88%A4%E6%96%AD%E5%AD%97%E8%8A%82%E5%BA%8F-%E5%A4%A7%E7%AB%AF-%E5%B0%8F%E7%AB%AF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Git初阶功法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/04/Git%E5%88%9D%E9%98%B6%E5%8A%9F%E6%B3%95/">Git初阶功法</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/04/Git%E5%88%9D%E9%98%B6%E5%8A%9F%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2021-12-04T03:25:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://learngitbranching.js.org/?locale=zh_CN">点击进入练功房</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/04/Git%E5%88%9D%E9%98%B6%E5%8A%9F%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深度探索C-对象模型-第三章Data语意学" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/01/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C-%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B-%E7%AC%AC%E4%B8%89%E7%AB%A0Data%E8%AF%AD%E6%84%8F%E5%AD%A6/">深度探索C++对象模型--第三章Data语意学</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/01/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C-%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B-%E7%AC%AC%E4%B8%89%E7%AB%A0Data%E8%AF%AD%E6%84%8F%E5%AD%A6/" class="archive-article-date">
-  	<time datetime="2021-12-01T06:00:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>归纳一些知识点，慢慢补充，可能存在错误，后期修改。
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/01/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C-%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B-%E7%AC%AC%E4%B8%89%E7%AB%A0Data%E8%AF%AD%E6%84%8F%E5%AD%A6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -917,6 +949,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cpp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
             
             <div class="clearfix"></div>
