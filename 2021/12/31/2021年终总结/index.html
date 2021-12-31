@@ -6,21 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://allybuli.github.io">
-  <title>分离式编译模式 | 叶子的小本本</title>
+  <title>2021年终总结 | 叶子的小本本</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="分离编译模式源于C语言，在C++语言中继续沿用。简单地说，分离编译模式是指：">
+  <meta name="description" content="从2021-01-24，这天开始在这里写下了自己的第一个记录，到现在已经一年过去了。时间过得好快啊！那么就在这里与2021认真道个别吧！(前半篇有点负能量！慎读！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="分离式编译模式">
-<meta property="og:url" content="https://allybuli.github.io/2021/02/24/%E5%88%86%E7%A6%BB%E5%BC%8F%E7%BC%96%E8%AF%91%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="2021年终总结">
+<meta property="og:url" content="https://allybuli.github.io/2021/12/31/2021%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="叶子的小本本">
-<meta property="og:description" content="分离编译模式源于C语言，在C++语言中继续沿用。简单地说，分离编译模式是指：">
+<meta property="og:description" content="从2021-01-24，这天开始在这里写下了自己的第一个记录，到现在已经一年过去了。时间过得好快啊！那么就在这里与2021认真道个别吧！(前半篇有点负能量！慎读！">
 <meta property="og:locale">
-<meta property="og:image" content="https://allybuli.github.io/images/compilationMode.jpg">
-<meta property="article:published_time" content="2021-02-24T12:58:47.000Z">
-<meta property="article:modified_time" content="2021-03-19T13:06:01.307Z">
+<meta property="article:published_time" content="2021-12-31T14:56:00.000Z">
+<meta property="article:modified_time" content="2021-12-31T16:54:20.543Z">
 <meta property="article:author" content="ally">
+<meta property="article:tag" content="日常">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://allybuli.github.io/images/compilationMode.jpg">
   
     <link rel="alternative" href="/atom.xml" title="叶子的小本本" type="application/atom+xml">
   
@@ -148,31 +147,38 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-分离式编译模式" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2021年终总结" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      分离式编译模式
+      2021年终总结
     </h1>
   
 
         
-        <a href="/2021/02/24/%E5%88%86%E7%A6%BB%E5%BC%8F%E7%BC%96%E8%AF%91%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-02-24T12:58:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-24</time>
+        <a href="/2021/12/31/2021%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2021-12-31T14:56:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-31</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>分离编译模式源于C语言，在C++语言中继续沿用。简单地说，分离编译模式是指：<a id="more"></a>一个程序（项目）由若干个源文件共同实现，而每个源文件单独编译生成目标文件，最后将所有目标文件连接起来形成单一的可执行文件的过程。</p>
-<h5 id="分离编译模式的定义"><a href="#分离编译模式的定义" class="headerlink" title="分离编译模式的定义"></a>分离编译模式的定义</h5><p>一个程序（项目）由若干个源文件共同实现，而每个源文件单独编译生成目标文件，最后将所有目标文件连接起来形成单一的可执行文件的过程。</p>
-<h5 id="分离编译模式的由来"><a href="#分离编译模式的由来" class="headerlink" title="分离编译模式的由来"></a>分离编译模式的由来</h5><p>分离编译模式是C/C++组织源代码和生成可执行文件的方式。在实际开发大型项目的时候，不可能把所有的源程序都放在一个头文件中，而是分别由不同的程序员开发不同的模块，再将这些模块汇总成为最终的可执行程序。<br>这里就涉及到不同的模块（源文件）定义的函数和变量之间的相互调用问题。C/C++语言所采用的方法是：只要给出函数原型（或外部变量声明），就可以在本源文件中使用该函数（或变量）。每个源文件都是独立的编译单元，在当前源文件中使用但未在此定义的变量或者函数，就假设在其他的源文件中定义好了。每个源文件生成独立的目标文件（obj文件），然后通过连接（Linking）将目标文件组成最终的可执行文件。<br>程序编译的简要过程包括预处理(Preprocessing)、编译(Compilation)、汇编(Assembly)和连接(Linking)。</p>
-<p>注意：以c++语言为例，每个源文件都是独立的编译单元，即编译是相对于每个cpp文件而言的。</p>
-<img src="/images/compilationMode.jpg">
+        <p>从2021-01-24，这天开始在这里写下了自己的第一个记录，到现在已经一年过去了。时间过得好快啊！那么就在这里与2021认真道个别吧！(前半篇有点负能量！慎读！<a id="more"></a></p>
+<p>一月底，大二上学期末，决定退出创新班，不再做一些无谓的挣扎，不适合不喜欢做的东西本身就不应该去花时间的，得不到成就感，反而会让自己整个人变得很颓。现在想来不过是一个无关紧要的决定，不过那一时间段的自己真的很难受，自己给了自己很大的压力。也是在这一时间段和官小凤同学彻底断了联系，嗯，以后应该都不会去打扰她了，没有意义。人与人之间只要不产生联系就不会产生任何矛盾。咬着牙考完了试，回家过年，春节期间去外婆家，表姐问我打不打算考研。我回答，不考，我要找工作。之后后面的学习都开始慢慢面向找工作而学习。</p>
+<p>二月份开始尝试摸索，那时候李子聪跟我说想去参加微信小程序大赛，由此开始了对于前端领域的摸索性学习。HTML、CSS、JS在假期期间都学了点皮毛，那时候也不知道什么学习路线，甚至对于整个计算机领域的学习都是无从下手的，感觉那时自己还是没有彻底摆脱高中的学习思维。找了些中国慕课网的视频就自己一顿瞎学，也没有系统的去学，另外也感觉自己一个学习是一件不容易的事情，容易动力不足。</p>
+<p>三月份回了学校，就有个网络中心的培训，也不知道是啥，就进去看看，想着看能不能学到点东西。最后也是什么都没有学到，半个月左右自己就跑路了。</p>
+<p>四五六月份，感觉一直在摆烂，小程序也没有在写，全组摆烂。中间还穿插的参加了个蓝桥杯，另外那时学校的课程也是计算机网络和操作系统，自己也比较想学好这两门课程，导致有时候学习没有重心，学习效率地下，学习效率这个问题到现在还是一个很大的问题。最后的结果可想而知，没有一样是做的好的。乱成了一锅粥，烂成了稀泥。</p>
+<p>七月份，考试的时候发生了件事(一个绩点很高的同学在考场上作弊)让我对于学校成绩的判定，GPA的多少不再在乎。考完试感觉整个人都是飘的，风往那边吹就往那边倒。考完试，还去尝试找了暑假兼职，那时候完全没有意识到时间的宝贵，完全不知道自己落后了别人一大截。干了一天，趟床上一宿，脑袋空空，和个木头一样，第二天买了票回家了。在我们农村基本我这个年纪的暑假都会呆家里，一般他们都会去打暑假工帮补家里。别人问起来，老妈也只是说：我需要学习。老爸还在那段时间失业了，但是他们都没有说让我去做什么。只是对我说，你按自己的安排来就好，不过你要想好怎么做。可能老妈懂得不多，但我知道她很希望我好。老爸也是。就等着找到工作，拿到第一份工资，给老妈买双好看的鞋，给老爸买件西服。</p>
+<p>八月，开始走上cpp的道路，我未曾预想在我面前是个深不见底的大坑。。。整个月都是再读《C++Primer》和刷题，尝试看了下《STL源码剖析》被劝退了。但是学习cpp开始走上了正轨，虽然很坑，但也是一条路，虽然很难，但是已经走出起点，在路上了。</p>
+<p>九月十月，恰逢牛客免费开放了一些学习视频，跟着牛客的c++服务器项目视频过了一遍，学习了一些比较简单的Linux系统编程和网络编程，但也仅仅只是有个印象而已。期间也看了侯捷老师的STL源码剖析的视频讲解，一鼓作气将《STL源码剖析》这本书也给啃了下来。学习还是要讲究方法，找到适合自己的方法学习就变成了一件很舒服的事情。看视频看书，一直重复，努力补上基础。</p>
+<p>十一月，搞了本effective C++，囫囵吞枣的读了起来，现在记得的几乎为零了，还有就是B站哈工大的操作系统课，重点学习了进程管理和内存管理模块，后续还得通过书复习完善。</p>
+<p>十二月，《TCP/IP网络编程》、《Linux高性能服务器编程》主要看来这两本书，配合牛客的一些项目资料，将web服务器的代码抄了了一遍，系统的学了下Linux系统编程和网络编程。其实进入到大三上这一学期主要都是在学习拉下的基础知识，反而没想那么多了，就一股脑的学，哪怕前面是深渊也往前走了。</p>
+<p>希望2022继续加油！一切顺利！</p>
+
       
 
       
@@ -180,6 +186,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -230,7 +247,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2021/02/24/%E5%88%86%E7%A6%BB%E5%BC%8F%E7%BC%96%E8%AF%91%E6%A8%A1%E5%BC%8F/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2021/12/31/2021%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -244,18 +261,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/03/09/Django%E2%80%94%E2%80%94%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Django——笔记
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/02/22/WEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91-JS%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">WEB前端开发--JS入门基础</div>
+    <a href="/2021/12/31/UDP%E4%B8%AD%E4%B8%80%E4%B8%AA%E5%8C%85%E7%9A%84%E5%A4%A7%E5%B0%8F%E6%9C%80%E5%A4%A7%E4%B8%BA%E5%A4%9A%E5%A4%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">UDP中一个包的大小最大为多大</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -282,7 +290,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E7%A6%BB%E7%BC%96%E8%AF%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">分离编译模式的定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E7%A6%BB%E7%BC%96%E8%AF%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%94%B1%E6%9D%A5"><span class="toc-number">2.</span> <span class="toc-text">分离编译模式的由来</span></a></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
