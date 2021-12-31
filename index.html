@@ -165,17 +165,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>转载文章，<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000017959319">原文章</a></p>
-</blockquote>
-<p>因为UDP数据传输的无连接特性，最简单的UDP数据传输就是一次数据交互一个UDP包搞定，这样就不用管分包问题。</p>
-<h4 id="局域网环境下，建议将UDP数据控制在1472字节以下"><a href="#局域网环境下，建议将UDP数据控制在1472字节以下" class="headerlink" title="局域网环境下，建议将UDP数据控制在1472字节以下"></a>局域网环境下，建议将UDP数据控制在1472字节以下</h4><p>以太网(Ethernet)数据帧的长度必须在46-1500字节之间,<strong>这是由以太网的物理特性决定的，这个1500字节被称为链路层的MTU(最大传输单元)。</strong> 但这并不是指链路层的长度被限制在1500字节，其实这这个MTU指的是链路层的数据区，并不包括链路层的首部和尾部的18个字节。</p>
-<p>所以，事实上这个1500字节就是网络层IP数据报的长度限制。因为IP数据报的首部为20字节，所以IP数据报的数据区长度最大为1480字节。而这个<strong>1480字节就是用来放TCP传来的TCP报文段或UDP传来的UDP数据报的。</strong></p>
-<p><strong>又因为UDP数据报的首部8字节，所以UDP数据报的数据区最大长度为1472字节。这个1472字节就是我们可以使用的字节数</strong></p>
-<h4 id="当我们发送的UDP数据大于1472的时候会怎样呢？"><a href="#当我们发送的UDP数据大于1472的时候会怎样呢？" class="headerlink" title="当我们发送的UDP数据大于1472的时候会怎样呢？"></a>当我们发送的UDP数据大于1472的时候会怎样呢？</h4><p>这也就是说IP数据报大于1500字节，大于MTU，这个时候发送方IP层就需要分片(fragmentation)。把数据报分成若干片，使每一片都小于MTU，而接收方IP层则需要进行数据报的重组。这样就会多做许多事情，而更严重的是，由于UDP的特性，当某一片数据传送中丢失时，接收方无法重组数据报，将导致丢弃整个UDP数据报。</p>
-<p>因此，在普通的局域网环境下，我建议将UDP的数据控制在1472字节以下为好。</p>
-<h4 id="Internet编程时，建议将UDP数据控制在548字节以下"><a href="#Internet编程时，建议将UDP数据控制在548字节以下" class="headerlink" title="Internet编程时，建议将UDP数据控制在548字节以下"></a>Internet编程时，建议将UDP数据控制在548字节以下</h4><p>Internet上的标准MTU值为576字节。</p>
-<p><strong>unix网络编程第一卷里说：ipv4协议规定ip层的最小重组缓冲区大小为576！所以，建议udp包不要超过这个大小，而不是因为internet的标准MTU是576！</strong></p>
-
+<p>转载文章，<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000017959319">原文章</a>
+        
       
 
       
