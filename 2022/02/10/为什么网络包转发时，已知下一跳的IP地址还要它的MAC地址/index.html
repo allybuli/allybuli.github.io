@@ -6,17 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://allybuli.github.io">
-  <title>CSAPP Unit2 | 叶子的小本本</title>
+  <title>为什么网络包转发时，已知下一跳的IP地址还要它的MAC地址 | 叶子的小本本</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="CSAPP Unit2">
-<meta property="og:url" content="https://allybuli.github.io/2021/07/26/CSAPP-Unit2/index.html">
+  <meta name="description" content="为什么网络包转发时，已知下一跳的IP地址还要它的MAC地址?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么网络包转发时，已知下一跳的IP地址还要它的MAC地址">
+<meta property="og:url" content="https://allybuli.github.io/2022/02/10/%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BD%91%E7%BB%9C%E5%8C%85%E8%BD%AC%E5%8F%91%E6%97%B6%EF%BC%8C%E5%B7%B2%E7%9F%A5%E4%B8%8B%E4%B8%80%E8%B7%B3%E7%9A%84IP%E5%9C%B0%E5%9D%80%E8%BF%98%E8%A6%81%E5%AE%83%E7%9A%84MAC%E5%9C%B0%E5%9D%80/index.html">
 <meta property="og:site_name" content="叶子的小本本">
+<meta property="og:description" content="为什么网络包转发时，已知下一跳的IP地址还要它的MAC地址?">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-07-26T15:00:22.000Z">
-<meta property="article:modified_time" content="2021-07-26T15:00:23.040Z">
+<meta property="og:image" content="d:/study/blog/allybuli/source/images/IP_MAC.jpg">
+<meta property="article:published_time" content="2022-02-10T14:14:06.000Z">
+<meta property="article:modified_time" content="2022-02-10T14:27:46.949Z">
 <meta property="article:author" content="ally">
+<meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:/study/blog/allybuli/source/images/IP_MAC.jpg">
   
     <link rel="alternative" href="/atom.xml" title="叶子的小本本" type="application/atom+xml">
   
@@ -144,14 +149,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-CSAPP-Unit2" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-为什么网络包转发时，已知下一跳的IP地址还要它的MAC地址" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      CSAPP Unit2
+      为什么网络包转发时，已知下一跳的IP地址还要它的MAC地址
     </h1>
   
 
@@ -163,8 +168,8 @@
 	</span>
 
 
-<a href="/2021/07/26/CSAPP-Unit2/" class="archive-article-date">
-  	<time datetime="2021-07-26T15:00:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-26</time>
+<a href="/2022/02/10/%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BD%91%E7%BB%9C%E5%8C%85%E8%BD%AC%E5%8F%91%E6%97%B6%EF%BC%8C%E5%B7%B2%E7%9F%A5%E4%B8%8B%E4%B8%80%E8%B7%B3%E7%9A%84IP%E5%9C%B0%E5%9D%80%E8%BF%98%E8%A6%81%E5%AE%83%E7%9A%84MAC%E5%9C%B0%E5%9D%80/" class="archive-article-date">
+  	<time datetime="2022-02-10T14:14:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-10</time>
 </a>
           <!-- 开始添加字数统计-->
         
@@ -174,7 +179,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <blockquote>
+<p>为什么网络包转发时，已知下一跳的IP地址还要它的MAC地址?<a id="more"></a></p>
+</blockquote>
+<p><img src="D:\study\blog\allybuli\source\images\IP_MAC.jpg" alt="image-20220210222005620"> </p>
+<p>一般来说我们的目标地址都在远方，网络包需要通过网络上的路由器不断的转发才能最终达到目标地址。</p>
+<p>在网络包里，有源IP地址和目标IP地址、源MAC地址和目标MAC地址。在转发过程中，从路由表中取得下一跳的IP地址后，应该把这个地址放在哪里呢？  </p>
+<p>如果放在目标IP地址里面，原来的目标地址就会被覆盖，谁知道最终的目标在哪里呢？所以要用MAC地址。</p>
+<p><strong>所谓的下一跳，看起来是IP地址，其实是要通过ARP得到MAC地址，将下—跳的MAC地址放在目标MAC地址里面。</strong></p>
+<p>参考文章：</p>
+<p>《趣谈网络协议》第一讲</p>
+
       
 
       
@@ -182,6 +197,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -232,7 +258,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2021/07/26/CSAPP-Unit2/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2022/02/10/%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BD%91%E7%BB%9C%E5%8C%85%E8%BD%AC%E5%8F%91%E6%97%B6%EF%BC%8C%E5%B7%B2%E7%9F%A5%E4%B8%8B%E4%B8%80%E8%B7%B3%E7%9A%84IP%E5%9C%B0%E5%9D%80%E8%BF%98%E8%A6%81%E5%AE%83%E7%9A%84MAC%E5%9C%B0%E5%9D%80/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -246,18 +272,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/07/30/CSAPP%E7%AC%94%E8%AE%B0-%E6%B5%AE%E7%82%B9%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/02/11/ARP%E5%B9%BF%E6%92%AD%E5%8F%AF%E8%83%BD%E5%AF%BC%E8%87%B4%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          CSAPP笔记--浮点数
+          ARP广播可能导致的问题
         
       </div>
     </a>
   
   
-    <a href="/2021/07/12/%E6%98%AF%E6%97%B6%E5%80%99%E4%BD%9C%E5%87%BA%E5%86%B3%E5%AE%9A%E4%BA%86/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">是时候作出决定了</div>
+    <a href="/2022/01/08/%E4%B8%80%E4%B8%AA%E7%94%B1C-C-%E7%BC%96%E8%AF%91%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%8D%A0%E7%94%A8%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E4%B8%BA%E5%93%AA%E5%87%A0%E4%B8%AA%E9%83%A8%E5%88%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ELF文件结构</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -408,7 +434,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">

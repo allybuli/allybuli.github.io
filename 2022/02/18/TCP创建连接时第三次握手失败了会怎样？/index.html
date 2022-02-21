@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://allybuli.github.io">
-  <title>Linux中的进程和线程 | 叶子的小本本</title>
+  <title>TCP创建连接时第三次握手失败了会怎样？ | 叶子的小本本</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在Linux中不区分线程和进程，线程只是一种特殊的进程。">
+  <meta name="description" content="TCP创建连接时第三次握手失败了会怎样？  第三次握手失败也就是说，客户端给服务端返回了ACK报文，服务端并不能收到这个ACK报文。 我们都知道，在第二次握手，服务端向客户端发送SYN+ACK报文后，就会启动一个定时器，等待客户端返回的ACK报文。 如果第三次握手失败，服务端就会启动超时重传机制。重传次数根据&#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;tcp_synack_retries来指定，默认是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux中的进程和线程">
-<meta property="og:url" content="https://allybuli.github.io/2021/12/24/Linux%E4%B8%AD%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/index.html">
+<meta property="og:title" content="TCP创建连接时第三次握手失败了会怎样？">
+<meta property="og:url" content="https://allybuli.github.io/2022/02/18/TCP%E5%88%9B%E5%BB%BA%E8%BF%9E%E6%8E%A5%E6%97%B6%E7%AC%AC%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%A4%B1%E8%B4%A5%E4%BA%86%E4%BC%9A%E6%80%8E%E6%A0%B7%EF%BC%9F/index.html">
 <meta property="og:site_name" content="叶子的小本本">
-<meta property="og:description" content="在Linux中不区分线程和进程，线程只是一种特殊的进程。">
+<meta property="og:description" content="TCP创建连接时第三次握手失败了会怎样？  第三次握手失败也就是说，客户端给服务端返回了ACK报文，服务端并不能收到这个ACK报文。 我们都知道，在第二次握手，服务端向客户端发送SYN+ACK报文后，就会启动一个定时器，等待客户端返回的ACK报文。 如果第三次握手失败，服务端就会启动超时重传机制。重传次数根据&#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;tcp_synack_retries来指定，默认是">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-12-24T03:37:39.000Z">
-<meta property="article:modified_time" content="2021-12-24T05:55:06.876Z">
+<meta property="article:published_time" content="2022-02-18T13:58:58.000Z">
+<meta property="article:modified_time" content="2022-02-18T14:10:31.024Z">
 <meta property="article:author" content="ally">
-<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="叶子的小本本" type="application/atom+xml">
@@ -147,14 +147,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Linux中的进程和线程" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-TCP创建连接时第三次握手失败了会怎样？" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Linux中的进程和线程
+      TCP创建连接时第三次握手失败了会怎样？
     </h1>
   
 
@@ -166,8 +166,8 @@
 	</span>
 
 
-<a href="/2021/12/24/Linux%E4%B8%AD%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2021-12-24T03:37:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-24</time>
+<a href="/2022/02/18/TCP%E5%88%9B%E5%BB%BA%E8%BF%9E%E6%8E%A5%E6%97%B6%E7%AC%AC%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%A4%B1%E8%B4%A5%E4%BA%86%E4%BC%9A%E6%80%8E%E6%A0%B7%EF%BC%9F/" class="archive-article-date">
+  	<time datetime="2022-02-18T13:58:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-18</time>
 </a>
           <!-- 开始添加字数统计-->
         
@@ -178,8 +178,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>在Linux中不区分线程和进程，线程只是一种特殊的进程。<a id="more"></a></p>
+<p>TCP创建连接时第三次握手失败了会怎样？</p>
 </blockquote>
+<p>第三次握手失败也就是说，客户端给服务端返回了ACK报文，服务端并不能收到这个ACK报文。</p>
+<p>我们都知道，在第二次握手，服务端向客户端发送SYN+ACK报文后，就会启动一个定时器，等待客户端返回的ACK报文。</p>
+<p>如果第三次握手失败，服务端就会启动超时重传机制。<strong>重传次数根据/proc/sys/net/ipv4/tcp_synack_retries来指定，默认是5次。</strong>  </p>
+<p>如果重传指定次数到了后，仍然未收到ACK应答，那么一段时间后，服务端会自动关闭这个连接。  </p>
+<p>但客户端认为这个连接已经建立，如果客户端向服务端写数据，服务端将回应RST包、强制关闭TCP连接，以防止SYN攻击。</p>
 
       
 
@@ -193,7 +198,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
         		</li>
       		
 		</ul>
@@ -249,7 +254,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2021/12/24/Linux%E4%B8%AD%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2022/02/18/TCP%E5%88%9B%E5%BB%BA%E8%BF%9E%E6%8E%A5%E6%97%B6%E7%AC%AC%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%A4%B1%E8%B4%A5%E4%BA%86%E4%BC%9A%E6%80%8E%E6%A0%B7%EF%BC%9F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -263,18 +268,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/12/29/%E5%86%99%E4%B8%80%E4%B8%AA%E5%9C%A8%E7%BA%BF%E8%BF%90%E8%A1%8CC-%E4%BB%A3%E7%A0%81%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8-%E4%B8%80/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          写一个在线运行C++代码的编辑器(一)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/12/23/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E7%9A%84%E5%AE%9E%E7%8E%B0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">智能指针的实现</div>
+    <a href="/2022/02/11/ARP%E5%B9%BF%E6%92%AD%E5%8F%AF%E8%83%BD%E5%AF%BC%E8%87%B4%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ARP广播可能导致的问题</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -425,7 +421,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
