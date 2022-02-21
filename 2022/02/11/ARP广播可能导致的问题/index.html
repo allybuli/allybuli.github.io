@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://allybuli.github.io">
   <title>ARP广播可能导致的问题 | 叶子的小本本</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="如果一个局域网里面有多个交换机，ARP 广播的模式会出现什么问题呢？  ARP广播时，交换机会将一个端口收到的包转发到其他所有的端口上。   比如数据包经过交换机A达到交换机B，交换机B又将包复制为多份广播出去。 如果整个局域网存在一个环路，使得数据包又重新回到交换机A，这个包又会被A再次复制多份广播出去。数据包不断被转发，越来越多，最终占满带宽，形成广播风暴。 解决方法： 使用生成树算法即ST">
+  <meta name="description" content="如果一个局域网里面有多个交换机，ARP 广播的模式会出现什么问题呢？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ARP广播可能导致的问题">
 <meta property="og:url" content="https://allybuli.github.io/2022/02/11/ARP%E5%B9%BF%E6%92%AD%E5%8F%AF%E8%83%BD%E5%AF%BC%E8%87%B4%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="叶子的小本本">
-<meta property="og:description" content="如果一个局域网里面有多个交换机，ARP 广播的模式会出现什么问题呢？  ARP广播时，交换机会将一个端口收到的包转发到其他所有的端口上。   比如数据包经过交换机A达到交换机B，交换机B又将包复制为多份广播出去。 如果整个局域网存在一个环路，使得数据包又重新回到交换机A，这个包又会被A再次复制多份广播出去。数据包不断被转发，越来越多，最终占满带宽，形成广播风暴。 解决方法： 使用生成树算法即ST">
+<meta property="og:description" content="如果一个局域网里面有多个交换机，ARP 广播的模式会出现什么问题呢？">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-02-11T13:58:35.000Z">
-<meta property="article:modified_time" content="2022-02-12T05:06:10.979Z">
+<meta property="article:modified_time" content="2022-02-21T09:06:01.360Z">
 <meta property="article:author" content="ally">
 <meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary">
@@ -178,7 +178,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>如果一个局域网里面有多个交换机，ARP 广播的模式会出现什么问题呢？</p>
+<p>如果一个局域网里面有多个交换机，ARP 广播的模式会出现什么问题呢？<a id="more"></a></p>
 </blockquote>
 <p>ARP广播时，交换机会将一个端口收到的包转发到其他所有的端口上。  </p>
 <p>比如数据包经过交换机A达到交换机B，交换机B又将包复制为多份广播出去。</p>
