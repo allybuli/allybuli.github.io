@@ -219,7 +219,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ally@ally-virtual-machine:~/project/NuiKeCpp/U4/P32$ ./server </span><br><span class="line">bind: Address already in use</span><br></pre></td></tr></table></figure>
 <p><code>ps au</code> 查看进程内存状况</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ally@ally-virtual-machine:~/project/NuiKeCpp/U4/P32$ ps au</span><br><span class="line">USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</span><br><span class="line">ally        3185  0.0  0.2  19636  5428 pts/4    Ss   09:45   0:00 /bin/bash</span><br><span class="line">ally        3735  0.0  0.0   5864  1792 pts/4    T    10:42   0:00 ./server</span><br><span class="line">ally        3751  0.0  0.2  19344  4924 pts/5    Ss+  10:42   0:00 /usr/bin/bash</span><br><span class="line">ally        4258  0.0  0.1  21008  3420 pts/4    R+   11:09   0:00 ps au</span><br></pre></td></tr></table></figure>
-<p>发现已存在./server，此时处于停止状态，依旧占有资源，没有释放。</p>
+<p>发现已存在.&#x2F;server，此时处于停止状态，依旧占有资源，没有释放。</p>
 <p>此时可以恢复进程执行，首先<code>jobs</code>：查看被挂起的程序工作号</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ally@ally-virtual-machine:~/project/NuiKeCpp/U4/P32$ jobs</span><br><span class="line">[1]+  已停止               ./server</span><br></pre></td></tr></table></figure>
 <p>然后**<code>fg</code>命令将挂起的作业放回到前台执行；用<code>bg</code>命令将挂起的作业放到后台执行**<br>格式：fg 工作号；bg 工作号</p>
@@ -481,6 +481,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">cpp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">C/C++语言基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">玩具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -493,7 +505,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">cpp</a>
+                <a href="javascript:void(0)" class="js-tag color5">Linux网络编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -505,15 +517,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C/C++语言基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Linux网络编程</a>
+                <a href="javascript:void(0)" class="js-tag color3">cpp - 栈</a>
               </li>
             
             <div class="clearfix"></div>

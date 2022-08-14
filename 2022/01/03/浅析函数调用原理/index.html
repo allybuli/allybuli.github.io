@@ -25,10 +25,9 @@
 <meta property="og:image" content="https://allybuli.github.io/images/function_call_principle/create_5.jpg">
 <meta property="og:image" content="https://allybuli.github.io/images/function_call_principle/overflow_attack.jpg">
 <meta property="article:published_time" content="2022-01-02T16:04:04.000Z">
-<meta property="article:modified_time" content="2022-02-12T15:12:25.332Z">
+<meta property="article:modified_time" content="2022-08-14T08:58:19.753Z">
 <meta property="article:author" content="ally">
-<meta property="article:tag" content="cpp">
-<meta property="article:tag" content="栈">
+<meta property="article:tag" content="cpp - 栈">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://allybuli.github.io/images/function_call_principle/memory_layout.jpg">
   
@@ -209,7 +208,7 @@
 <p>每次发生函数调用就将函数返回地址压入栈中，函数执行结束后将返回地址从栈中弹出到PC中。</p>
 <h3 id="函数调用的数据传递"><a href="#函数调用的数据传递" class="headerlink" title="函数调用的数据传递"></a>函数调用的数据传递</h3><h4 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h4><p>存储到寄存器和栈中，进入到被调用函数后，可以访问被使用的寄存器和栈来获取参数。</p>
 <p>当被调用函数引用了参数的内存地址，那么这个参数也必须放在栈中，因为寄存器是没有内存地址的。</p>
-<h4 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h4><p>在C/C++语言中最多只会有一个返回值，所以通常就直接放在寄存器中，然后调用者再从这个寄存器中获取返回值。</p>
+<h4 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h4><p>在C&#x2F;C++语言中最多只会有一个返回值，所以通常就直接放在寄存器中，然后调用者再从这个寄存器中获取返回值。</p>
 <h3 id="函数调用的控制流切换"><a href="#函数调用的控制流切换" class="headerlink" title="函数调用的控制流切换"></a>函数调用的控制流切换</h3><p>前面已经谈到了控制转移，这里再来说说其中的一些细节。</p>
 <p>我们假设是在单核的环境下，CPU只有一个，寄存器是通用的，那么进行函数调用的时候需要对这些寄存器的值进行保存，在被调用函数执行结束返回到当前函数后再将其恢复。那么这些寄存器的值保存到哪里呢？</p>
 <p><strong><font color=red>同保存函数返回地址一样：保存到栈中。</font></strong></p>
@@ -249,7 +248,7 @@
 
 <p>main函数返回到_start同add_a_and_b函数返回到main函数，不再赘述</p>
 <p><strong><font color=red>可以注意到一点：栈帧在销毁时，只是简单的对栈指针和栈基址进行移动,并不会修改里面的数据，数据还保存在栈中。</font></strong></p>
-<h4 id="溢出攻击"><a href="#溢出攻击" class="headerlink" title="溢出攻击"></a>溢出攻击</h4><p>在C/C++程序中并不会阻止越界访问，那么栈帧里的数据就有被修改的风险。</p>
+<h4 id="溢出攻击"><a href="#溢出攻击" class="headerlink" title="溢出攻击"></a>溢出攻击</h4><p>在C&#x2F;C++程序中并不会阻止越界访问，那么栈帧里的数据就有被修改的风险。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test.c</span></span><br><span class="line"><span class="comment">// 编译方式：gcc test.c -fno-stack-protector</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello, I&#x27;m fun!\n&quot;</span>);</span><br><span class="line">    sleep(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> a[<span class="number">5</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">  <span class="comment">// 传说中的溢出攻击</span></span><br><span class="line">  a[<span class="number">5</span>] = (<span class="keyword">int</span>)fun;</span><br><span class="line">  a[<span class="number">6</span>] = (<span class="keyword">int</span>)fun;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <img src="/images/function_call_principle/overflow_attack.jpg" />
 
@@ -274,11 +273,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cpp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">栈</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">cpp - 栈</a>
         		</li>
       		
 		</ul>
@@ -514,6 +509,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">cpp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">C/C++语言基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">玩具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -526,7 +533,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">cpp</a>
+                <a href="javascript:void(0)" class="js-tag color5">Linux网络编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -538,15 +545,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C/C++语言基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Linux网络编程</a>
+                <a href="javascript:void(0)" class="js-tag color3">cpp - 栈</a>
               </li>
             
             <div class="clearfix"></div>

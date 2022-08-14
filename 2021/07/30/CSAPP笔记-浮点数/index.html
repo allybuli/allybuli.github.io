@@ -183,39 +183,39 @@
 </blockquote>
 <h2 id="IEEE浮点数表示"><a href="#IEEE浮点数表示" class="headerlink" title="IEEE浮点数表示"></a>IEEE浮点数表示</h2><p>在 IEEE 标准中，我们用下面的公式来表达浮点数：</p>
 <blockquote>
-<p>V = (-1)<sup>s</sup> M 2<sup>E<sup></p>
+<p>V &#x3D; (-1)<sup>s</sup> M 2<sup>E<sup></p>
 </blockquote>
 <ul>
-<li>符号(sign) s = 0表示正数，s = 1表示负数</li>
+<li>符号(sign) s &#x3D; 0表示正数，s &#x3D; 1表示负数</li>
 <li>尾数(significand) M是一个二进制小数，范围是[1,2) 或 [0,1)</li>
 <li>阶码(exponent) E的作用是对浮点数加权，这个权重是2的E次幂</li>
 </ul>
 <p>符号位s编码s，阶码字段exp编码阶码E，字段frac编码尾数M<br><img src="/images/float-point_encoding.jpg"></p>
 <h3 id="根据exp的值划分三种不同的编码情况"><a href="#根据exp的值划分三种不同的编码情况" class="headerlink" title="根据exp的值划分三种不同的编码情况"></a>根据exp的值划分三种不同的编码情况</h3><ul>
-<li><font color = blue>规范化的值</font><br>此时exp ≠ 00…00 且 exp ≠ 11…11。阶码字段被解释为以偏置形式表示的有符号整数。<br>阶码值E = exp - Bias，其中exp是无符号数，Bias是一个偏置值(单精度是127，双精度是1023)。<blockquote>
+<li><font color = blue>规范化的值</font><br>此时exp ≠ 00…00 且 exp ≠ 11…11。阶码字段被解释为以偏置形式表示的有符号整数。<br>阶码值E &#x3D; exp - Bias，其中exp是无符号数，Bias是一个偏置值(单精度是127，双精度是1023)。<blockquote>
 <p>之所以需要采用一个偏移量，是为了保证 exp 编码只需要以无符号数来处理。</p>
 </blockquote>
 </li>
 </ul>
-<p>尾数定义为M = 1 + f。其中0 &lt;= f &lt; 1，f二进制表示为0.xxxx…xxx。则M二进制表示为1.xxx…xxxx。即隐含了开头的1。<br><font color = green>栗子：</font>float F = 15213.0;  </p>
+<p>尾数定义为M &#x3D; 1 + f。其中0 &lt;&#x3D; f &lt; 1，f二进制表示为0.xxxx…xxx。则M二进制表示为1.xxx…xxxx。即隐含了开头的1。<br><font color = green>栗子：</font>float F &#x3D; 15213.0;  </p>
 <blockquote>
-<p>15213<sub>10</sub> = 11101101101101<sub>2</sub> = 1.1101101101101<sub>2</sub> × 2<sup>13</sup></p>
+<p>15213<sub>10</sub> &#x3D; 11101101101101<sub>2</sub> &#x3D; 1.1101101101101<sub>2</sub> × 2<sup>13</sup></p>
 </blockquote>
-<p>有M = 1.1101101101101，即frac = 1101101101101<br>因float为单精度，则exp = 13 + Bias = 13 + 127 = 140 = 10001100<sub>2</sub><br>对应编码表示：</p>
+<p>有M &#x3D; 1.1101101101101，即frac &#x3D; 1101101101101<br>因float为单精度，则exp &#x3D; 13 + Bias &#x3D; 13 + 127 &#x3D; 140 &#x3D; 10001100<sub>2</sub><br>对应编码表示：</p>
 <blockquote>
-<p>0 10001100 1101101101101<br>s &emsp;exp &emsp;&emsp;&emsp;frac</p>
+<p>0 10001100 1101101101101<br>s &amp;emsp;exp &amp;emsp;&amp;emsp;&amp;emsp;frac</p>
 </blockquote>
 <ul>
-<li><p><font color = blue>非规范化的值</font><br>此时exp = 00…00。阶码值E = 1 - Bias，尾数值M = f，不包含隐含的开头的1。<br>当exp = 00…00 且 frac = 00…00时，表示0。符号位s = 0时，表示+1；s = 1时，表示-1。<br>非规格化数的另一个功能是表示那些非常接近于0.0的数。它们提供了一种属性，称为<font color = red>逐渐下溢</font>，其中，可能的数值分部均匀地接近于0.0。</p>
+<li><p><font color = blue>非规范化的值</font><br>此时exp &#x3D; 00…00。阶码值E &#x3D; 1 - Bias，尾数值M &#x3D; f，不包含隐含的开头的1。<br>当exp &#x3D; 00…00 且 frac &#x3D; 00…00时，表示0。符号位s &#x3D; 0时，表示+1；s &#x3D; 1时，表示-1。<br>非规格化数的另一个功能是表示那些非常接近于0.0的数。它们提供了一种属性，称为<font color = red>逐渐下溢</font>，其中，可能的数值分部均匀地接近于0.0。</p>
 </li>
-<li><p><font color = blue>特殊值</font><br>此时exp = 11…11。<br>当exp = 11…11 且 frac = 00…00时，表示∞，同样由符号位来决定是+∞还是-∞。无穷用来表示溢出的结果，比如两个非常大的数相乘。<br>当exp = 11…11 且 frac ≠ 00…00时，结果值被称为”NaN”,即不是一个数(Not a Number)。比如sqrt(-1)。</p>
+<li><p><font color = blue>特殊值</font><br>此时exp &#x3D; 11…11。<br>当exp &#x3D; 11…11 且 frac &#x3D; 00…00时，表示∞，同样由符号位来决定是+∞还是-∞。无穷用来表示溢出的结果，比如两个非常大的数相乘。<br>当exp &#x3D; 11…11 且 frac ≠ 00…00时，结果值被称为”NaN”,即不是一个数(Not a Number)。比如sqrt(-1)。</p>
 </li>
 </ul>
 <h2 id="舍入"><a href="#舍入" class="headerlink" title="舍入"></a>舍入</h2><ul>
 <li>向0舍入</li>
 <li>向下舍入</li>
 <li>向上舍入</li>
-<li>向偶数舍入(默认)  </li>
+<li>向偶数舍入(默认)</li>
 </ul>
 <table>
 <thead>
@@ -484,6 +484,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">cpp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">C/C++语言基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">玩具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -496,7 +508,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">cpp</a>
+                <a href="javascript:void(0)" class="js-tag color5">Linux网络编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -508,15 +520,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C/C++语言基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Linux网络编程</a>
+                <a href="javascript:void(0)" class="js-tag color3">cpp - 栈</a>
               </li>
             
             <div class="clearfix"></div>

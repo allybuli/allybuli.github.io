@@ -182,7 +182,7 @@
 </blockquote>
 <p>第三次握手失败也就是说，客户端给服务端返回了ACK报文，服务端并不能收到这个ACK报文。</p>
 <p>我们都知道，在第二次握手，服务端向客户端发送SYN+ACK报文后，就会启动一个定时器，等待客户端返回的ACK报文。</p>
-<p>如果第三次握手失败，服务端就会启动超时重传机制。<strong>重传次数根据/proc/sys/net/ipv4/tcp_synack_retries来指定，默认是5次。</strong>  </p>
+<p>如果第三次握手失败，服务端就会启动超时重传机制。<strong>重传次数根据&#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;tcp_synack_retries来指定，默认是5次。</strong>  </p>
 <p>如果重传指定次数到了后，仍然未收到ACK应答，那么一段时间后，服务端会自动关闭这个连接。  </p>
 <p>但客户端认为这个连接已经建立，如果客户端向服务端写数据，服务端将回应RST包、强制关闭TCP连接，以防止SYN攻击。</p>
 
@@ -434,6 +434,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">cpp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">C/C++语言基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">玩具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -446,7 +458,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">cpp</a>
+                <a href="javascript:void(0)" class="js-tag color5">Linux网络编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -458,15 +470,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C/C++语言基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Linux网络编程</a>
+                <a href="javascript:void(0)" class="js-tag color3">cpp - 栈</a>
               </li>
             
             <div class="clearfix"></div>

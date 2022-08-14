@@ -192,18 +192,16 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Empty</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;I am Empty class&quot;</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NotEbo</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Empty e_;</span><br><span class="line">    <span class="keyword">int</span> num_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ebo</span>:</span> <span class="keyword">public</span> Empty &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> num_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(Empty) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 1 占位字节</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(NotEbo) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;  <span class="comment">// 8 字节对齐 </span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(Ebo) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;     <span class="comment">// 4 忽略基类占位字节</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-
 </li>
-</ul>
-<ul>
 <li><p>C++对member functions本身的分析会直到整个class的声明都出现了才开始。所以class的member functions可以引用声明在后面的成员。<strong>经测试class中的typedef也具备这个性质。</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;typeinfo&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> length;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Demo() &#123;</span><br><span class="line">        num_ = <span class="number">6</span>;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(length).name() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~Demo()&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getNum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> num_;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// typedef std::string length;</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">display1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(length).name() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">string</span> length;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">display2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(length).name() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// typedef std::string length;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="comment">// typedef std::string length;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// typedef std::string length;</span></span><br><span class="line">    <span class="keyword">int</span> num_ = <span class="number">2</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Demo d;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; d.getNum() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    d.display1();</span><br><span class="line">    d.display2();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>typedef std::string length; 无论在代码中的五个位置中的哪一个位置声明，display1和display2绑定的length类型都是std::string。</p>
 </li>
 <li><p>数据成员的存取</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ClassType x;</span><br><span class="line">ClassType *px;</span><br><span class="line">x.num &#x3D; 6;</span><br><span class="line">px-&gt;num &#x3D; 6;</span><br><span class="line">&#x2F;&#x2F; 这两个存取过程有什么区别？</span><br></pre></td></tr></table></figure>
-<p>​        <strong>当ClassType类是一个继承体系中有虚基类的子类，并且num成员正是虚基类中的成员时</strong>，这两种存        取过程会有很大的不同。x的数据类型是固定的，编译期即可知道num成员的地址，而px指向的对象        的数据类型是运行期动态绑定的，存取需要延迟到执行期。</p>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ClassType x;</span><br><span class="line">ClassType *px;</span><br><span class="line">x.num &#x3D; 6;</span><br><span class="line">px-&gt;num &#x3D; 6;</span><br><span class="line">&#x2F;&#x2F; 这两个存取过程有什么区别？</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>​		<strong>当ClassType类是一个继承体系中有虚基类的子类，并且num成员正是虚基类中的成员时</strong>，这两种存		取过程会有很大的不同。x的数据类型是固定的，编译期即可知道num成员的地址，而px指向的对象		的数据类型是运行期动态绑定的，存取需要延迟到执行期。</p>
+<ul>
 <li><p>支持多态带来的负担</p>
 <p><strong>1.</strong> 导入virtual table用来存放每一个virtual functions的地址。table的元素数目一般是被声明的virtual functions数目加上一个或两个slots（用以支持runtime type identification，即<strong>运行时类型识别</strong>，程序能够使用基类的指针或引用来检查着这些指针或引用所指的对象的实际派生类型）</p>
 <p><strong>2.</strong> 在每一个class object中安插一个vptr指向相应的vtable</p>
@@ -464,6 +462,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">cpp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">C/C++语言基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">玩具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -476,7 +486,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">cpp</a>
+                <a href="javascript:void(0)" class="js-tag color5">Linux网络编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -488,15 +498,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C/C++语言基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Linux网络编程</a>
+                <a href="javascript:void(0)" class="js-tag color3">cpp - 栈</a>
               </li>
             
             <div class="clearfix"></div>

@@ -191,19 +191,19 @@
 <h3 id="3-makefile执行规则"><a href="#3-makefile执行规则" class="headerlink" title="3.makefile执行规则"></a>3.makefile执行规则</h3><ul>
 <li>命令在执行之前，需要先检查规则中的依赖是否存在  <ul>
 <li>如果存在，执行命令  </li>
-<li>如果不存在，向下检查其它的规则，检查有没有一个规则是用来生成这个依赖的，如果找到了，则执行该规则中的命令  </li>
+<li>如果不存在，向下检查其它的规则，检查有没有一个规则是用来生成这个依赖的，如果找到了，则执行该规则中的命令</li>
 </ul>
 </li>
 <li>检测更新，在执行规则中的命令时，会比较目标和依赖文件的时间  <ul>
 <li>如果依赖的时间比目标的时间晚，需要重新生成目标  </li>
-<li>如果依赖的时间比目标的时间早，目标不需要更新，对应规则中的命令不需要被执行  </li>
+<li>如果依赖的时间比目标的时间早，目标不需要更新，对应规则中的命令不需要被执行</li>
 </ul>
 </li>
 </ul>
 <h3 id="4-clean脚本"><a href="#4-clean脚本" class="headerlink" title="4.clean脚本"></a>4.clean脚本</h3><p>用于删除一些中间的生成文件<br><font color=green>栗子：</font><br>makefile</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">main: main.cpp print_hello.o print_bey.o</span><br><span class="line">    g++ main.cpp print_hello.o print_bey.o  -o main</span><br><span class="line"></span><br><span class="line">print_hello.o: print_hello.cpp</span><br><span class="line">    g++ -c print_hello.cpp</span><br><span class="line"></span><br><span class="line">print_bey.o: print_bey.cpp</span><br><span class="line">    g++ -c print_bey.cpp</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    rm *.o main</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ally@ally-virtual-machine:~&#x2F;project&#x2F;Linux&#x2F;example$ make clean</span><br><span class="line">rm *.o main</span><br></pre></td></tr></table></figure>
-<h3 id="5-变量"><a href="#5-变量" class="headerlink" title="5.变量"></a>5.变量</h3><p>1.自定义变量<br>    变量名 = 变量值</p>
+<h3 id="5-变量"><a href="#5-变量" class="headerlink" title="5.变量"></a>5.变量</h3><p>1.自定义变量<br>    变量名 &#x3D; 变量值</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var&#x3D;hello</span><br><span class="line">#获取变量的值$(变量名)</span><br><span class="line">$(var)</span><br></pre></td></tr></table></figure>
 <p>makefile</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">CC &#x3D; g++</span><br><span class="line">CFLAGS &#x3D; -g -Wall</span><br><span class="line"></span><br><span class="line">main: main.cpp print_hello.o print_bey.o</span><br><span class="line">    $(CC) $(CFLAGS) main.cpp print_hello.o print_bey.o  -o main</span><br><span class="line"></span><br><span class="line">print_hello.o: print_hello.cpp</span><br><span class="line">    $(CC) $(CFLAGS) -c print_hello.cpp</span><br><span class="line"></span><br><span class="line">print_bey.o: print_bey.cpp</span><br><span class="line">    $(CC) $(CFLAGS) -c print_bey.cpp</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    rm *.o main</span><br></pre></td></tr></table></figure>
@@ -452,6 +452,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">cpp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">C/C++语言基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">玩具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -464,7 +476,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">cpp</a>
+                <a href="javascript:void(0)" class="js-tag color5">Linux网络编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -476,15 +488,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C/C++语言基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Linux网络编程</a>
+                <a href="javascript:void(0)" class="js-tag color3">cpp - 栈</a>
               </li>
             
             <div class="clearfix"></div>
