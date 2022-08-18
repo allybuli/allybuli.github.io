@@ -15,18 +15,17 @@
 <meta property="og:site_name" content="叶子-随笔记">
 <meta property="og:description" content="分页与分段都是是解决内存外部碎片的实现技术。">
 <meta property="og:locale">
-<meta property="og:image" content="https://allybuli.github.io/images/linux_signal_flow.png">
-<meta property="og:image" content="d:/study/blog/allybuli/source/images/操作系统内存管理/逻辑地址映射为物理地址.jpg">
-<meta property="og:image" content="c:/Users/YYY/AppData/Roaming/Typora/typora-user-images/image-20220304000803357.png">
-<meta property="og:image" content="c:/Users/YYY/AppData/Roaming/Typora/typora-user-images/image-20220304001127812.png">
-<meta property="og:image" content="c:/Users/YYY/AppData/Roaming/Typora/typora-user-images/image-20220304001406261.png">
-<meta property="og:image" content="c:/Users/YYY/AppData/Roaming/Typora/typora-user-images/image-20220304001649219.png">
+<meta property="og:image" content="https://allybuli.github.io/images/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%BA%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80.jpg">
+<meta property="og:image" content="https://allybuli.github.io/images/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%B1%82%E6%AC%A1%E9%A1%B5%E8%A1%A8.png">
+<meta property="og:image" content="https://allybuli.github.io/images/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%93%88%E5%B8%8C%E9%A1%B5%E8%A1%A8.png">
+<meta property="og:image" content="https://allybuli.github.io/images/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%8F%8D%E5%90%91%E9%A1%B5%E8%A1%A8.png">
+<meta property="og:image" content="https://allybuli.github.io/images/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%88%86%E6%AE%B5%E7%A1%AC%E4%BB%B6.png">
 <meta property="article:published_time" content="2022-03-02T06:25:30.000Z">
-<meta property="article:modified_time" content="2022-03-22T09:31:50.589Z">
+<meta property="article:modified_time" content="2022-08-18T10:10:28.271Z">
 <meta property="article:author" content="ally">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://allybuli.github.io/images/linux_signal_flow.png">
+<meta name="twitter:image" content="https://allybuli.github.io/images/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%BA%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80.jpg">
   
     <link rel="alternative" href="/atom.xml" title="叶子-随笔记" type="application/atom+xml">
   
@@ -190,9 +189,7 @@
 <p>这里谈其中一个：<strong>共享页</strong>。如果代码的<strong>可重入代码</strong>，进程之间是可以共享页的。<strong>可以节省内存空间。</strong></p>
 <h4 id="一页逻辑内存如何映射到一帧物理内存？或者说逻辑地址如何映射为物理地址？"><a href="#一页逻辑内存如何映射到一帧物理内存？或者说逻辑地址如何映射为物理地址？" class="headerlink" title="一页逻辑内存如何映射到一帧物理内存？或者说逻辑地址如何映射为物理地址？"></a>一页逻辑内存如何映射到一帧物理内存？或者说逻辑地址如何映射为物理地址？</h4><p>需要页表的支持。</p>
 <p>CPU生成的逻辑地址，在页表看来是两个部分：页号（p）和页偏移（d）。页号作为页表中的索引。页表中存放每页所在的物理内存的基地址（f）。基地址+页偏移后才是真实的物理地址。</p>
-<img src="/images/linux_signal_flow.png" />
-
-<p><img src="D:\study\blog\allybuli\source\images\操作系统内存管理\逻辑地址映射为物理地址.jpg" alt="image-20220302235113874"></p>
+<p><img src="/../images/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%BA%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80.jpg"></p>
 <h4 id="一页逻辑内存为多大？"><a href="#一页逻辑内存为多大？" class="headerlink" title="一页逻辑内存为多大？"></a>一页逻辑内存为多大？</h4><p>页的大小和硬件有关，现在通常为4~8KB。分页不会产生外部碎片，但是还会产生内部碎片。最坏的情况下，一个进程会产生一页大小减1Btye的内部碎片。</p>
 <p>页的大小会影响页表的大小，而每个进程都有一个自己的页表，页的大小越小页表就越大，会导致进程需要的内存资源更多。</p>
 <h4 id="页表是怎样的？"><a href="#页表是怎样的？" class="headerlink" title="页表是怎样的？"></a>页表是怎样的？</h4><p>因为CPU每一次访存都需要经过页表，所以页表一定要快。所以很容易想到使用寄存器，如果页表较小的话使用一组寄存器是很好的选择。</p>
@@ -203,16 +200,16 @@
 </ul>
 <p>使得页表可以在内存中离散存储。</p>
 <p>单级页表为了随机访问必须连续存储，如果虚拟内存空间很大，就需要很多页表项，就需要很大的连续内存空间，但是多级页表不需要。</p>
-<p><img src="C:\Users\YYY\AppData\Roaming\Typora\typora-user-images\image-20220304000803357.png" alt="image-20220304000803357"></p>
+<p><img src="/../images/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%B1%82%E6%AC%A1%E9%A1%B5%E8%A1%A8.png"></p>
 <ul>
 <li>哈希页表</li>
 </ul>
-<p>对于超出32位的地址空间，常使用哈希页表，哈希页表使用链表法（哈希后产生相同值的项放到一个链表中），对于CPU产生的地址，还是先找页号，页号通过哈希函数在哈希页表中找到条目的一个链表，然后遍历链表，比较页号是否与链表中的项的第一个域匹配，匹配的话，用第二个域代表帧号，CPU产生地址的页偏移还作为物理地址的偏移量。<br><img src="C:\Users\YYY\AppData\Roaming\Typora\typora-user-images\image-20220304001127812.png" alt="image-20220304001127812"></p>
+<p>对于超出32位的地址空间，常使用哈希页表，哈希页表使用链表法（哈希后产生相同值的项放到一个链表中），对于CPU产生的地址，还是先找页号，页号通过哈希函数在哈希页表中找到条目的一个链表，然后遍历链表，比较页号是否与链表中的项的第一个域匹配，匹配的话，用第二个域代表帧号，CPU产生地址的页偏移还作为物理地址的偏移量。<br><img src="/../images/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%93%88%E5%B8%8C%E9%A1%B5%E8%A1%A8.png"></p>
 <ul>
 <li>反向页表</li>
 </ul>
-<p>由于每一个进程都有一个页表，每一个页表可能有很多项，传统的页表可能会占用很多空间。反向页表用于解决这个问题，反向页表的思路是为物理内存的每一个帧维护一个表，这样操作系统只需要维护一个页表即可。为了区分是哪个进程使用了哪一帧，CPU产生的逻辑地址会分成三部分——进程标识符、页号、页偏移。使用进程标识符和页号，搜索整个页表，计算帧号，结合页偏移得到物理地址。<br><img src="C:\Users\YYY\AppData\Roaming\Typora\typora-user-images\image-20220304001406261.png" alt="image-20220304001406261"></p>
-<h3 id="分段"><a href="#分段" class="headerlink" title="分段"></a>分段</h3><p>分页的一个问题是用户视角的内存和操作系统视角的内存是不一样的，分段从另一个角度解决内存不连续使用的问题。<br>分段将一个程序所需的内存空间分成代码、全局变量、堆栈等段，每一段占用一定的空间，一个进程拥有一个段表，其中有每一个段的段长度（界限）和基地址。CPU产生的逻辑地址分成段号和段内偏移，通过段号可以在段表中找到包含基地址和段长度的项，进而比较段内偏移是否超出界限，之后在找到物理地址。<br><img src="C:\Users\YYY\AppData\Roaming\Typora\typora-user-images\image-20220304001649219.png" alt="image-20220304001649219"></p>
+<p>由于每一个进程都有一个页表，每一个页表可能有很多项，传统的页表可能会占用很多空间。反向页表用于解决这个问题，反向页表的思路是为物理内存的每一个帧维护一个表，这样操作系统只需要维护一个页表即可。为了区分是哪个进程使用了哪一帧，CPU产生的逻辑地址会分成三部分——进程标识符、页号、页偏移。使用进程标识符和页号，搜索整个页表，计算帧号，结合页偏移得到物理地址。<br><img src="/../images/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%8F%8D%E5%90%91%E9%A1%B5%E8%A1%A8.png"></p>
+<h3 id="分段"><a href="#分段" class="headerlink" title="分段"></a>分段</h3><p>分页的一个问题是用户视角的内存和操作系统视角的内存是不一样的，分段从另一个角度解决内存不连续使用的问题。<br>分段将一个程序所需的内存空间分成代码、全局变量、堆栈等段，每一段占用一定的空间，一个进程拥有一个段表，其中有每一个段的段长度（界限）和基地址。CPU产生的逻辑地址分成段号和段内偏移，通过段号可以在段表中找到包含基地址和段长度的项，进而比较段内偏移是否超出界限，之后在找到物理地址。<br><img src="/../images/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%88%86%E6%AE%B5%E7%A1%AC%E4%BB%B6.png"></p>
 <p>参考资料：</p>
 <ul>
 <li>《操作系统概念》第七版第八章</li>
