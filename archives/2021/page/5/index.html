@@ -6,22 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://allybuli.github.io">
-  <title>操作系统内存管理--虚拟内存 | 叶子-随笔记</title>
+  <title>Archives: 2021 | 叶子-随笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在讨论虚拟内存技术之前，我们前面所讲的所有内存管理策略都是需要在进程执行之前将整个进程放进内存中，那么进程能使用的内存空间只能比物理空间小，这大大限制了进程的大小和内存的使用率。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="操作系统内存管理--虚拟内存">
-<meta property="og:url" content="https://allybuli.github.io/2022/03/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="叶子-随笔记">
+<meta property="og:url" content="https://allybuli.github.io/archives/2021/page/5/index.html">
 <meta property="og:site_name" content="叶子-随笔记">
-<meta property="og:description" content="在讨论虚拟内存技术之前，我们前面所讲的所有内存管理策略都是需要在进程执行之前将整个进程放进内存中，那么进程能使用的内存空间只能比物理空间小，这大大限制了进程的大小和内存的使用率。">
 <meta property="og:locale">
-<meta property="og:image" content="http://www.educity.cn/tiku/uploadfiles/2015-05/1bd68a29ba7d40fd9338323103234b51_.png">
-<meta property="article:published_time" content="2022-03-04T15:28:36.000Z">
-<meta property="article:modified_time" content="2022-03-22T09:19:12.457Z">
 <meta property="article:author" content="ally">
-<meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.educity.cn/tiku/uploadfiles/2015-05/1bd68a29ba7d40fd9338323103234b51_.png">
   
     <link rel="alternative" href="/atom.xml" title="叶子-随笔记" type="application/atom+xml">
   
@@ -149,229 +142,112 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-操作系统内存管理--虚拟内存" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      操作系统内存管理--虚拟内存
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2021" class="archive-year">2021</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
+
+<a href="/2021/02/01/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E5%88%B0Github%E4%BB%93%E5%BA%93/" class="archive-article-date">
+  	<time datetime="2021-02-01T03:54:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-01</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/02/01/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E5%88%B0Github%E4%BB%93%E5%BA%93/">将本地项目上传到Github仓库</a>
     </h1>
   
 
-        
-        
-	<!-- 不蒜子统计 -->
-	<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-		  <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-	</span>
+        <div class="article-info info-on-right">
+          
+          
 
-
-<a href="/2022/03/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" class="archive-article-date">
-  	<time datetime="2022-03-04T15:28:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-04</time>
-</a>
-          <!-- 开始添加字数统计-->
-        
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>在讨论虚拟内存技术之前，我们前面所讲的所有内存管理策略都是需要在进程执行之前将整个进程放进内存中，那么进程能使用的内存空间只能比物理空间小，这大大限制了进程的大小和内存的使用率。<a id="more"></a></p>
-</blockquote>
-<p>虚拟内存技术允许执行进程不必完全在内存中。也就是说，当进程使用CPU时，并不将整个程序载入内存，而是<strong>按需调页</strong>。这样有利于更多进程共同使用内存，增加了CPU利用率。</p>
-<h3 id="什么是按需调页？"><a href="#什么是按需调页？" class="headerlink" title="什么是按需调页？"></a>什么是按需调页？</h3><p>只有程序执行需要时才载入页，那些从未访问的页不会调入物理内存。</p>
-<p>避免了读入不使用的页，减少了交换时间何所需的物理内存空间。</p>
-<h3 id="按需调页怎么实现的？"><a href="#按需调页怎么实现的？" class="headerlink" title="按需调页怎么实现的？"></a>按需调页怎么实现的？</h3><p>需要某个页的时候需要知道它在不在内存中。这需要硬件支持来区分哪些页在内存中，哪些页在磁盘上。</p>
-<p>通过在页表增加一个有效-无效位，当该位设置为有效，表示相应的页在内存中。当该位设置为无效，表示相应的页不在内存中。</p>
-<p>当访问了无效的页，就会产生页错误陷阱（中断），操作系统会响应中断，在内存中找到一个空闲帧，调度一个磁盘操作，将所需要的页调入刚分配的帧。进程重新执行中断的指令。</p>
-<h3 id="按需调页带来的问题"><a href="#按需调页带来的问题" class="headerlink" title="按需调页带来的问题"></a>按需调页带来的问题</h3><ul>
-<li><strong>一个指令出现多次页错误中断</strong></li>
-</ul>
-<p>很可能一个指令中包含多条访存操作，这样如果其中有一次有页错误中断，则指令就需要重做，然后重新访存，这造成了性能的浪费。</p>
-<ul>
-<li><strong>页错误率</strong></li>
-</ul>
-<p>如果页失效的次数太多，会导致进程执行经常被打断，进而影响性能，尤其磁盘调度相比于访问内存，时间量级差别很大。</p>
-<ul>
-<li><p><strong>页面置换问题</strong></p>
-<p>当物理内存中没有空闲帧但却需要进行调页时将如何处理呢？一般物理内存会预留空闲帧以防调度，但是还是可能存在空闲帧不足的情况。</p>
-</li>
-</ul>
-<h3 id="页面置换问题"><a href="#页面置换问题" class="headerlink" title="页面置换问题"></a>页面置换问题</h3><p>在内存分配过度的情况下，当发生了页错误，需要将磁盘上的页换入内存，但内存已经没有空闲的位置（即空闲帧列表没有空闲帧），所有的内存都在使用。为了换入需要的页，必须牺牲掉内存了的一个正在使用的帧，交换到磁盘上，腾出内存空间。</p>
-<p><strong>牺牲的帧，需要保存到磁盘，这一步是不是必须的呢？</strong></p>
-<p>每一页无论在不在内存中，在磁盘上都有一份副本，如果这一页在上一次写入内存到需要换出都没有修改，那换出时就不需要保存到磁盘的操作，因为磁盘本身就有一份一样的副本。优化的时间性能，空间换时间。</p>
-<p><strong>通过使用修改位来标识一个页是否被修改，页表上的每一项都有一个修改位</strong></p>
-<p><img src="http://www.educity.cn/tiku/uploadfiles/2015-05/1bd68a29ba7d40fd9338323103234b51_.png" alt="img"></p>
-<h3 id="页置换算法"><a href="#页置换算法" class="headerlink" title="页置换算法"></a>页置换算法</h3><p><strong><font color=red>如何选择要置换的帧（即牺牲掉哪个帧）</font></strong></p>
-<h4 id="FIFO页置换（先进先出）"><a href="#FIFO页置换（先进先出）" class="headerlink" title="FIFO页置换（先进先出）"></a>FIFO页置换（先进先出）</h4><p>先请求的页先放入物理内存的帧中，当需要页置换时，最先放进去的也是最先被替换出去的。</p>
-<p>因为过于简单粗暴，可能引起一种异常现象，<strong>Belady异常</strong> 。也就是本想减少页错误而给一个进程多分配了物理帧，但是页错误反而上升的异常现象。（即内存更大，反而错误可能更多）</p>
-<h4 id="OPT页置换（最优页置换）"><a href="#OPT页置换（最优页置换）" class="headerlink" title="OPT页置换（最优页置换）"></a>OPT页置换（最优页置换）</h4><p>选择置换未来最少使用的页。**<font color=red>现阶段无法预知未来，所以无法实现</font>**</p>
-<h4 id="LRU页置换（最近最少使用）"><a href="#LRU页置换（最近最少使用）" class="headerlink" title="LRU页置换（最近最少使用）"></a>LRU页置换（最近最少使用）</h4><p>选择置换最久未使用的页。那就需要记录页多久没被使用了，这需要硬件的支持，需要<strong>计数器</strong>或<strong>页码栈</strong>。</p>
-<h4 id="近似LRU置换"><a href="#近似LRU置换" class="headerlink" title="近似LRU置换"></a>近似LRU置换</h4><p>因为LUR页置换需要硬件支持，所以可以换一种思路实现。为页表的每一项关联一个引用位，每当页被引用，相应页表的引用位就被硬件置位，这样就可以知道哪些页被用过，哪些页没用过。</p>
-<h3 id="帧分配"><a href="#帧分配" class="headerlink" title="帧分配"></a>帧分配</h3><p>操作系统会给每个进程分配一定数量的帧，少于页的数量，用于虚拟内存的置换，那该分配多少呢？</p>
-<p><strong>上限</strong>：不能超过内存的帧数</p>
-<p><strong>下限</strong>：如要完成一条指令那在指令中每次寻址都应该被满足，根据一条指令中最多有几次寻址，就可以确定下限。</p>
-<h4 id="帧分配算法"><a href="#帧分配算法" class="headerlink" title="帧分配算法"></a>帧分配算法</h4><ul>
-<li><p>平均分配：即最大帧除以进程总数得到的值，但是没有考虑到进程可能需要不同大小的内存空间。</p>
-</li>
-<li><p>按进程大小比例分配：按照进程的页（地址空间）的大小，按比例给进程分配帧数</p>
-</li>
-<li><p>按优先级分配：对于高优先级的进程，可以有更大的帧空间以便更快的执行。</p>
-</li>
-</ul>
-<h4 id="帧分配策略"><a href="#帧分配策略" class="headerlink" title="帧分配策略"></a>帧分配策略</h4><ul>
-<li>全局分配：允许进程抢占其他进程分配的帧。有更好的吞吐量，是更常用的策略，但是进程无法控制自己的页错误率，视外界情况不同，执行效果有差异。</li>
-<li>局部分配：不允许进程抢占其他进程分配的帧。进程可以把握页错误率，不同时期执行效果相同。</li>
-</ul>
-<h3 id="系统颠簸"><a href="#系统颠簸" class="headerlink" title="系统颠簸"></a>系统颠簸</h3><p>随着进程的增加，CPU的利用率也会增加，但是如果同一时间进程过多，每个进程占用的帧就相应变少了，就可能出现进程执行时需要经常性地页置换，CPU利用率又降低了的现象，而这时，操作系统还以为是进程数量太少导致的，还继续加入进程，导致每个进程占用的帧更少，CPU利用率更低的恶性循环，这种现象成为系统颠簸。<br>解决方法有两种：</p>
-<ol>
-<li>工作集合策略：计算每一个进程的使用帧的窗口（工作集合）近似得到进程需要的帧数，如果这个数大于内存的物理帧数，则说明系统颠簸了，需要减少进程。</li>
-<li>页错误概率策略：通过设计页错误率的上限和下限，停止进程或者加入进程。</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2022/03/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
 
-  
-<nav id="article-nav">
-  
-    <a href="/2022/08/14/HTTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AE%BE%E8%AE%A1%E5%9B%BE%E7%A8%BF/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          HTTP服务器设计图稿
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2022/03/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--%E5%88%86%E9%A1%B5%E4%B8%8E%E5%88%86%E6%AE%B5/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">操作系统内存管理--分页与分段</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+<a href="/2021/01/30/WEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94HTML%E5%9F%BA%E7%A1%80/" class="archive-article-date">
+  	<time datetime="2021-01-30T08:33:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-30</time>
+</a>
         </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%8C%89%E9%9C%80%E8%B0%83%E9%A1%B5%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是按需调页？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E9%9C%80%E8%B0%83%E9%A1%B5%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">按需调页怎么实现的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E9%9C%80%E8%B0%83%E9%A1%B5%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">按需调页带来的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">页面置换问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B5%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">页置换算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FIFO%E9%A1%B5%E7%BD%AE%E6%8D%A2%EF%BC%88%E5%85%88%E8%BF%9B%E5%85%88%E5%87%BA%EF%BC%89"><span class="toc-number">5.1.</span> <span class="toc-text">FIFO页置换（先进先出）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OPT%E9%A1%B5%E7%BD%AE%E6%8D%A2%EF%BC%88%E6%9C%80%E4%BC%98%E9%A1%B5%E7%BD%AE%E6%8D%A2%EF%BC%89"><span class="toc-number">5.2.</span> <span class="toc-text">OPT页置换（最优页置换）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LRU%E9%A1%B5%E7%BD%AE%E6%8D%A2%EF%BC%88%E6%9C%80%E8%BF%91%E6%9C%80%E5%B0%91%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="toc-number">5.3.</span> <span class="toc-text">LRU页置换（最近最少使用）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%91%E4%BC%BCLRU%E7%BD%AE%E6%8D%A2"><span class="toc-number">5.4.</span> <span class="toc-text">近似LRU置换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A7%E5%88%86%E9%85%8D"><span class="toc-number">6.</span> <span class="toc-text">帧分配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%A7%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95"><span class="toc-number">6.1.</span> <span class="toc-text">帧分配算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%A7%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5"><span class="toc-number">6.2.</span> <span class="toc-text">帧分配策略</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E9%A2%A0%E7%B0%B8"><span class="toc-number">7.</span> <span class="toc-text">系统颠簸</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/01/30/WEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94HTML%E5%9F%BA%E7%A1%80/">WEB前端开发——HTML基础</a>
+    </h1>
+  
+
+        <div class="article-info info-on-right">
+          
+          
+
         </div>
-        
-    </div>
-</aside>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
 
+<a href="/2021/01/24/%E6%A2%A6%E7%9A%84%E5%BC%80%E5%A7%8B/" class="archive-article-date">
+  	<time datetime="2021-01-24T04:57:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-24</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/01/24/%E6%A2%A6%E7%9A%84%E5%BC%80%E5%A7%8B/">夢的開始</a>
+    </h1>
+  
 
+        <div class="article-info info-on-right">
+          
+          
 
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
   
   
+    </div></section>
   
 
-  
-
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/2021/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/archives/2021/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2021/page/3/">3</a><a class="page-number" href="/archives/2021/page/4/">4</a><span class="page-number current">5</span>
+    </nav>
   
 
 
@@ -407,8 +283,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

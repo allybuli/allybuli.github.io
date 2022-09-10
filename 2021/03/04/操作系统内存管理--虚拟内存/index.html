@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://allybuli.github.io">
-  <title>操作系统内存管理--预备知识 | 叶子-随笔记</title>
+  <title>操作系统内存管理--虚拟内存 | 叶子-随笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="内存管理：使得计算机内存资源可以高效、快速的分配，并且在适当的时候释放和回收内存资源。">
+  <meta name="description" content="在讨论虚拟内存技术之前，我们前面所讲的所有内存管理策略都是需要在进程执行之前将整个进程放进内存中，那么进程能使用的内存空间只能比物理空间小，这大大限制了进程的大小和内存的使用率。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="操作系统内存管理--预备知识">
-<meta property="og:url" content="https://allybuli.github.io/2022/02/28/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:title" content="操作系统内存管理--虚拟内存">
+<meta property="og:url" content="https://allybuli.github.io/2021/03/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/index.html">
 <meta property="og:site_name" content="叶子-随笔记">
-<meta property="og:description" content="内存管理：使得计算机内存资源可以高效、快速的分配，并且在适当的时候释放和回收内存资源。">
+<meta property="og:description" content="在讨论虚拟内存技术之前，我们前面所讲的所有内存管理策略都是需要在进程执行之前将整个进程放进内存中，那么进程能使用的内存空间只能比物理空间小，这大大限制了进程的大小和内存的使用率。">
 <meta property="og:locale">
-<meta property="article:published_time" content="2022-02-28T07:39:54.000Z">
-<meta property="article:modified_time" content="2022-03-02T05:30:42.808Z">
+<meta property="og:image" content="http://www.educity.cn/tiku/uploadfiles/2015-05/1bd68a29ba7d40fd9338323103234b51_.png">
+<meta property="article:published_time" content="2021-03-04T15:28:36.000Z">
+<meta property="article:modified_time" content="2022-09-10T03:01:04.185Z">
 <meta property="article:author" content="ally">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.educity.cn/tiku/uploadfiles/2015-05/1bd68a29ba7d40fd9338323103234b51_.png">
   
     <link rel="alternative" href="/atom.xml" title="叶子-随笔记" type="application/atom+xml">
   
@@ -147,14 +149,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-操作系统内存管理--预备知识" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-操作系统内存管理--虚拟内存" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      操作系统内存管理--预备知识
+      操作系统内存管理--虚拟内存
     </h1>
   
 
@@ -166,8 +168,8 @@
 	</span>
 
 
-<a href="/2022/02/28/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86/" class="archive-article-date">
-  	<time datetime="2022-02-28T07:39:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-28</time>
+<a href="/2021/03/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" class="archive-article-date">
+  	<time datetime="2021-03-04T15:28:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-04</time>
 </a>
           <!-- 开始添加字数统计-->
         
@@ -177,43 +179,59 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>内存管理：使得计算机内存资源可以高效、快速的分配，并且在适当的时候释放和回收内存资源。<a id="more"></a></p>
-<h3 id="内存分配给谁？"><a href="#内存分配给谁？" class="headerlink" title="内存分配给谁？"></a>内存分配给谁？</h3><p><strong>分配给进程</strong></p>
-<h3 id="进程怎么利用内存？"><a href="#进程怎么利用内存？" class="headerlink" title="进程怎么利用内存？"></a>进程怎么利用内存？</h3><p><strong>进程具有CPU资源，CPU根据程序计数器（PC）的值从内存中提取指令，这些指令可能会引发进一步对特定内存地址的读取和写入。</strong></p>
-<h3 id="CPU怎么提取指令？"><a href="#CPU怎么提取指令？" class="headerlink" title="CPU怎么提取指令？"></a>CPU怎么提取指令？</h3><p>因为CPU所能直接访问的存储器只有内存和处理器内的寄存器。所以对于一个进程来说，执行指令以及指令使用的数据必须在这些直接可访问的存储设备上。如果数据不在内存中，在CPU使用前必须先把数据移到内存中。机器指令使用内存地址作为参数，而不能使用磁盘地址作为参数。</p>
-<p>CPU需要访问内存，就会随之带来一个问题：<strong>CPU运算速度与内存读写速度不匹配</strong>。</p>
-<p>完成内存访问可能需要多个CPU时钟周期，由于这个期间没有数据以便完成正在执行的指令，CPU通常需要暂停。这样CPU的使用率就会降低。有什么解决方法？</p>
-<p><strong>解决方法是在CPU与内存之间，增加高速缓存（Cache），协调速度差异，减少访问内存所需平均时间。</strong></p>
-<p>当处理器发出内存访问请求时，会先查看缓存内是否有请求数据。如果存在（命中），则不经访问内存直接返回该数据；如果不存在（失效），则要先把内存中的相应数据载入缓存，再将其返回处理器。</p>
-<p>这里可以引用一句名言：</p>
-<p><font color=red><strong>“Any problem in computer science can be solved by another layer of indirection.”</strong></font></p>
-<h3 id="执行指令中的地址是什么？怎么来的？"><a href="#执行指令中的地址是什么？怎么来的？" class="headerlink" title="执行指令中的地址是什么？怎么来的？"></a>执行指令中的地址是什么？怎么来的？</h3><p>指令给出的地址 (操作数) 叫逻辑地址，要经过寻址方式的计算或变换才得到内存储器中的实际有效地址，即物理地址。</p>
-<h4 id="关于逻辑地址的解释"><a href="#关于逻辑地址的解释" class="headerlink" title="关于逻辑地址的解释"></a>关于逻辑地址的解释</h4><ul>
-<li><p>把用户程序中使用的地址称为相对地址即逻辑地址。</p>
-</li>
-<li><p>逻辑地址由两个16位的地址分量构成，一个为段基值，另一个为偏移量。两个分量均为无符号数编码。</p>
-</li>
-<li><p>这样该存储单元的地址就可以用段基址(段地址)和段内偏移量(偏移地址)来表示,段基址确定它所在的段居于整个存储空间的位置,偏移量确定它在段内的位置,这种地址表示方式称为逻辑地址,通常表示为段地址:偏移地址的形式。</p>
-</li>
-<li><p>所谓逻辑地址是指按数据的逻辑块号给出的磁盘的位置（l块&#x3D;512字l字&#x3D;64位）而物理地址则是由磁盘的柱面、头、段等物理位置所确定的地址。</p>
-</li>
+        <blockquote>
+<p>在讨论虚拟内存技术之前，我们前面所讲的所有内存管理策略都是需要在进程执行之前将整个进程放进内存中，那么进程能使用的内存空间只能比物理空间小，这大大限制了进程的大小和内存的使用率。<a id="more"></a></p>
+</blockquote>
+<p>虚拟内存技术允许执行进程不必完全在内存中。也就是说，当进程使用CPU时，并不将整个程序载入内存，而是<strong>按需调页</strong>。这样有利于更多进程共同使用内存，增加了CPU利用率。</p>
+<h3 id="什么是按需调页？"><a href="#什么是按需调页？" class="headerlink" title="什么是按需调页？"></a>什么是按需调页？</h3><p>只有程序执行需要时才载入页，那些从未访问的页不会调入物理内存。</p>
+<p>避免了读入不使用的页，减少了交换时间何所需的物理内存空间。</p>
+<h3 id="按需调页怎么实现的？"><a href="#按需调页怎么实现的？" class="headerlink" title="按需调页怎么实现的？"></a>按需调页怎么实现的？</h3><p>需要某个页的时候需要知道它在不在内存中。这需要硬件支持来区分哪些页在内存中，哪些页在磁盘上。</p>
+<p>通过在页表增加一个有效-无效位，当该位设置为有效，表示相应的页在内存中。当该位设置为无效，表示相应的页不在内存中。</p>
+<p>当访问了无效的页，就会产生页错误陷阱（中断），操作系统会响应中断，在内存中找到一个空闲帧，调度一个磁盘操作，将所需要的页调入刚分配的帧。进程重新执行中断的指令。</p>
+<h3 id="按需调页带来的问题"><a href="#按需调页带来的问题" class="headerlink" title="按需调页带来的问题"></a>按需调页带来的问题</h3><ul>
+<li><strong>一个指令出现多次页错误中断</strong></li>
 </ul>
-<p>一个逻辑地址由两部份组成，段标识符和段内偏移量。一个完整的逻辑地址[段选择符：段内偏移地址]。</p>
-<p>好了，这就说这么多了，再往下说到段描述符，脑子都要炸了。</p>
-<h3 id="指令中逻辑地址如何映射到内存中物理地址？"><a href="#指令中逻辑地址如何映射到内存中物理地址？" class="headerlink" title="指令中逻辑地址如何映射到内存中物理地址？"></a>指令中逻辑地址如何映射到内存中物理地址？</h3><p>也就是说一个逻辑地址需要映射到一个物理地址上，这样访问一个逻辑地址就能访问一个真正的物理地址。这项地址映射工作由内存管理单元（MMU）的硬件设备完成。</p>
-<p>将逻辑地址绑定到物理地址有三种时机：</p>
+<p>很可能一个指令中包含多条访存操作，这样如果其中有一次有页错误中断，则指令就需要重做，然后重新访存，这造成了性能的浪费。</p>
 <ul>
-<li><strong>编译时：</strong>如果在编译时就知道进程将在内存中的驻留地址，就可以生成绝对代码。但如果将来开始地址发生变化（比如发生了进程交换），那就必须重新编译。</li>
-<li><strong>加载时：</strong>加载一般就是从磁盘读取应用程序（已编译）并装入内存，这时才进行地址绑定，如果开始地址发生变化，只需要重新加载用户代码以引入改变值。</li>
-<li><strong>执行时：</strong>如果进程在执行时可以从一个内存段转移到另一个内存段，那么地址绑定必须延迟到执行时才进行。（后续主要讨论这一个时机下的地址绑定）</li>
+<li><strong>页错误率</strong></li>
 </ul>
-<p>到此为止，讨论的都是一个进程整个程序和数据必须处于物理内存中，以便执行。</p>
-<p>参考资料：</p>
+<p>如果页失效的次数太多，会导致进程执行经常被打断，进而影响性能，尤其磁盘调度相比于访问内存，时间量级差别很大。</p>
 <ul>
-<li>《操作系统概念》第七版第八章第一节</li>
-<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/CPU%E7%BC%93%E5%AD%98/3728308">https://baike.baidu.com/item/CPU%E7%BC%93%E5%AD%98/3728308</a></li>
-<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80/3283849">https://baike.baidu.com/item/%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80/3283849</a></li>
+<li><p><strong>页面置换问题</strong></p>
+<p>当物理内存中没有空闲帧但却需要进行调页时将如何处理呢？一般物理内存会预留空闲帧以防调度，但是还是可能存在空闲帧不足的情况。</p>
+</li>
 </ul>
+<h3 id="页面置换问题"><a href="#页面置换问题" class="headerlink" title="页面置换问题"></a>页面置换问题</h3><p>在内存分配过度的情况下，当发生了页错误，需要将磁盘上的页换入内存，但内存已经没有空闲的位置（即空闲帧列表没有空闲帧），所有的内存都在使用。为了换入需要的页，必须牺牲掉内存了的一个正在使用的帧，交换到磁盘上，腾出内存空间。</p>
+<p><strong>牺牲的帧，需要保存到磁盘，这一步是不是必须的呢？</strong></p>
+<p>每一页无论在不在内存中，在磁盘上都有一份副本，如果这一页在上一次写入内存到需要换出都没有修改，那换出时就不需要保存到磁盘的操作，因为磁盘本身就有一份一样的副本。优化的时间性能，空间换时间。</p>
+<p><strong>通过使用修改位来标识一个页是否被修改，页表上的每一项都有一个修改位</strong></p>
+<p><img src="http://www.educity.cn/tiku/uploadfiles/2015-05/1bd68a29ba7d40fd9338323103234b51_.png" alt="img"></p>
+<h3 id="页置换算法"><a href="#页置换算法" class="headerlink" title="页置换算法"></a>页置换算法</h3><p><strong><font color=red>如何选择要置换的帧（即牺牲掉哪个帧）</font></strong></p>
+<h4 id="FIFO页置换（先进先出）"><a href="#FIFO页置换（先进先出）" class="headerlink" title="FIFO页置换（先进先出）"></a>FIFO页置换（先进先出）</h4><p>先请求的页先放入物理内存的帧中，当需要页置换时，最先放进去的也是最先被替换出去的。</p>
+<p>因为过于简单粗暴，可能引起一种异常现象，<strong>Belady异常</strong> 。也就是本想减少页错误而给一个进程多分配了物理帧，但是页错误反而上升的异常现象。（即内存更大，反而错误可能更多）</p>
+<h4 id="OPT页置换（最优页置换）"><a href="#OPT页置换（最优页置换）" class="headerlink" title="OPT页置换（最优页置换）"></a>OPT页置换（最优页置换）</h4><p>选择置换未来最少使用的页。**<font color=red>现阶段无法预知未来，所以无法实现</font>**</p>
+<h4 id="LRU页置换（最近最少使用）"><a href="#LRU页置换（最近最少使用）" class="headerlink" title="LRU页置换（最近最少使用）"></a>LRU页置换（最近最少使用）</h4><p>选择置换最久未使用的页。那就需要记录页多久没被使用了，这需要硬件的支持，需要<strong>计数器</strong>或<strong>页码栈</strong>。</p>
+<h4 id="近似LRU置换"><a href="#近似LRU置换" class="headerlink" title="近似LRU置换"></a>近似LRU置换</h4><p>因为LUR页置换需要硬件支持，所以可以换一种思路实现。为页表的每一项关联一个引用位，每当页被引用，相应页表的引用位就被硬件置位，这样就可以知道哪些页被用过，哪些页没用过。</p>
+<h3 id="帧分配"><a href="#帧分配" class="headerlink" title="帧分配"></a>帧分配</h3><p>操作系统会给每个进程分配一定数量的帧，少于页的数量，用于虚拟内存的置换，那该分配多少呢？</p>
+<p><strong>上限</strong>：不能超过内存的帧数</p>
+<p><strong>下限</strong>：如要完成一条指令那在指令中每次寻址都应该被满足，根据一条指令中最多有几次寻址，就可以确定下限。</p>
+<h4 id="帧分配算法"><a href="#帧分配算法" class="headerlink" title="帧分配算法"></a>帧分配算法</h4><ul>
+<li><p>平均分配：即最大帧除以进程总数得到的值，但是没有考虑到进程可能需要不同大小的内存空间。</p>
+</li>
+<li><p>按进程大小比例分配：按照进程的页（地址空间）的大小，按比例给进程分配帧数</p>
+</li>
+<li><p>按优先级分配：对于高优先级的进程，可以有更大的帧空间以便更快的执行。</p>
+</li>
+</ul>
+<h4 id="帧分配策略"><a href="#帧分配策略" class="headerlink" title="帧分配策略"></a>帧分配策略</h4><ul>
+<li>全局分配：允许进程抢占其他进程分配的帧。有更好的吞吐量，是更常用的策略，但是进程无法控制自己的页错误率，视外界情况不同，执行效果有差异。</li>
+<li>局部分配：不允许进程抢占其他进程分配的帧。进程可以把握页错误率，不同时期执行效果相同。</li>
+</ul>
+<h3 id="系统颠簸"><a href="#系统颠簸" class="headerlink" title="系统颠簸"></a>系统颠簸</h3><p>随着进程的增加，CPU的利用率也会增加，但是如果同一时间进程过多，每个进程占用的帧就相应变少了，就可能出现进程执行时需要经常性地页置换，CPU利用率又降低了的现象，而这时，操作系统还以为是进程数量太少导致的，还继续加入进程，导致每个进程占用的帧更少，CPU利用率更低的恶性循环，这种现象成为系统颠簸。<br>解决方法有两种：</p>
+<ol>
+<li>工作集合策略：计算每一个进程的使用帧的窗口（工作集合）近似得到进程需要的帧数，如果这个数大于内存的物理帧数，则说明系统颠簸了，需要减少进程。</li>
+<li>页错误概率策略：通过设计页错误率的上限和下限，停止进程或者加入进程。</li>
+</ol>
 
       
 
@@ -283,7 +301,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2022/02/28/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://allybuli.github.io/2021/03/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -297,18 +315,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2022/03/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--%E4%BA%A4%E6%8D%A2%E4%B8%8E%E8%BF%9E%E7%BB%AD%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/03/09/Django%E2%80%94%E2%80%94%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          操作系统内存管理--交换与连续内存分配
+          Django——笔记
         
       </div>
     </a>
   
   
-    <a href="/2022/02/11/ARP%E5%B9%BF%E6%92%AD%E5%8F%AF%E8%83%BD%E5%AF%BC%E8%87%B4%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ARP广播可能导致的问题</div>
+    <a href="/2021/03/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86--%E5%88%86%E9%A1%B5%E4%B8%8E%E5%88%86%E6%AE%B5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">操作系统内存管理--分页与分段</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -335,7 +353,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%BB%99%E8%B0%81%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">内存分配给谁？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%80%8E%E4%B9%88%E5%88%A9%E7%94%A8%E5%86%85%E5%AD%98%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">进程怎么利用内存？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU%E6%80%8E%E4%B9%88%E6%8F%90%E5%8F%96%E6%8C%87%E4%BB%A4%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">CPU怎么提取指令？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E6%8C%87%E4%BB%A4%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9D%80%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%80%8E%E4%B9%88%E6%9D%A5%E7%9A%84%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">执行指令中的地址是什么？怎么来的？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="toc-number">4.1.</span> <span class="toc-text">关于逻辑地址的解释</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E4%B8%AD%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80%E5%A6%82%E4%BD%95%E6%98%A0%E5%B0%84%E5%88%B0%E5%86%85%E5%AD%98%E4%B8%AD%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">指令中逻辑地址如何映射到内存中物理地址？</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%8C%89%E9%9C%80%E8%B0%83%E9%A1%B5%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是按需调页？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E9%9C%80%E8%B0%83%E9%A1%B5%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">按需调页怎么实现的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E9%9C%80%E8%B0%83%E9%A1%B5%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">按需调页带来的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">页面置换问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B5%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">页置换算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FIFO%E9%A1%B5%E7%BD%AE%E6%8D%A2%EF%BC%88%E5%85%88%E8%BF%9B%E5%85%88%E5%87%BA%EF%BC%89"><span class="toc-number">5.1.</span> <span class="toc-text">FIFO页置换（先进先出）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OPT%E9%A1%B5%E7%BD%AE%E6%8D%A2%EF%BC%88%E6%9C%80%E4%BC%98%E9%A1%B5%E7%BD%AE%E6%8D%A2%EF%BC%89"><span class="toc-number">5.2.</span> <span class="toc-text">OPT页置换（最优页置换）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LRU%E9%A1%B5%E7%BD%AE%E6%8D%A2%EF%BC%88%E6%9C%80%E8%BF%91%E6%9C%80%E5%B0%91%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="toc-number">5.3.</span> <span class="toc-text">LRU页置换（最近最少使用）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%91%E4%BC%BCLRU%E7%BD%AE%E6%8D%A2"><span class="toc-number">5.4.</span> <span class="toc-text">近似LRU置换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A7%E5%88%86%E9%85%8D"><span class="toc-number">6.</span> <span class="toc-text">帧分配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%A7%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95"><span class="toc-number">6.1.</span> <span class="toc-text">帧分配算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%A7%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5"><span class="toc-number">6.2.</span> <span class="toc-text">帧分配策略</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E9%A2%A0%E7%B0%B8"><span class="toc-number">7.</span> <span class="toc-text">系统颠簸</span></a></li></ol>
                     </div>
                 </span>
             </div>
